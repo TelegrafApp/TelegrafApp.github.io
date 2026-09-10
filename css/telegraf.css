@@ -739,6 +739,41 @@ img.tl_main_logo {
   height: 126px;
   margin: 0 auto;
 }
+.tl_main_logo_placeholder {
+  display: block;
+  width: 126px;
+  height: 126px;
+  margin: 0 auto;
+}
+.tl_page_wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.tl_page_footer {
+  position: relative;
+  text-align: center;
+  color: #8c8c8c;
+  font-size: 14px;
+  margin: auto 0 40px;
+}
+.tl_page_footer_link {
+  color: #8c8c8c;
+  text-decoration: none;
+}
+.tl_page_footer_link:hover {
+  color: #179cde;
+  text-decoration: none;
+}
+.tl_page_footer_org {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #a0a0a0;
+}
 div.tl_main_logo {
   display: block;
   width: 144px;
@@ -862,9 +897,22 @@ a.tl_main_download_link:hover:after {
 .tl_main_download_link_android {
   min-width: 280px;
   background: url(../img/SiteAndroid.jpg?1) 50% 0 no-repeat;
-  background-size: 410px auto !important;   
-  padding-top: 340px !important;        
+  background-size: 410px auto !important;
+  padding-top: 340px !important;
   padding-bottom: 45px;
+}
+.tl_main_download_link_web {
+  min-width: 0;
+  width: auto;
+  height: auto !important;
+  background: none !important;
+  font-size: 22px;
+  padding-top: 10px !important;
+  padding-bottom: 22px !important;
+}
+a.tl_main_download_link_web:after {
+  left: 0;
+  right: 0;
 }
 .tl_main_download_link_ios {
   width: 42.9961%;
@@ -1060,7 +1108,8 @@ a.tl_main_download_desktop_link:hover:after {
 }
 
 .icon-android,
-.icon-ios {
+.icon-ios,
+.icon-web {
   display: inline-block;
   vertical-align: text-top;
   width: 25px;
@@ -1070,7 +1119,8 @@ a.tl_main_download_desktop_link:hover:after {
   margin-top: -6px;
 }
 .lang_rtl .icon-android,
-.lang_rtl .icon-ios {
+.lang_rtl .icon-ios,
+.lang_rtl .icon-web {
   margin-right: 0;
   margin-left: 10px;
 }
@@ -1080,6 +1130,14 @@ a.tl_main_download_desktop_link:hover:after {
 }
 .icon-android {
   background-image: url(../img/SiteIconAndroid.svg);
+}
+.icon-web {
+  width: 26px;
+  height: 26px;
+  background-image: url(../img/app_icon_webz.svg);
+  background-size: contain;
+  vertical-align: middle;
+  margin-top: 0;
 }
 
 .icon {
@@ -5262,7 +5320,7 @@ i.tl_telegraf_share_icon {
     margin-top: 26px;
   }
   .td_content_title {
-    font-size: 22px;
+    font-size: 20px;
     margin-top: 21px;
     margin-bottom: 10px;
   }
