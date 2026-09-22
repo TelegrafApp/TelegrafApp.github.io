@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Privacy Policy &ndash; Telegraf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Privacy Policy &ndash; Telegraf">
+  <meta property="og:image" content="/img/t_logo.png">
+  <meta property="og:site_name" content="Telegraf">
+  <meta property="og:description" content="How Telegraf handles your information.">
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/telegraf.css" rel="stylesheet" media="screen">
+  <link href="/css/legal.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+  <div class="tl_page_wrap">
+    <div class="container clearfix tl_page_container">
+      <div class="tl_page">
+        <div class="tl_legal_wrap">
+          <h1 class="tl_legal_title">Privacy Policy</h1>
+          <p class="tl_legal_updated">Last updated: 22 September 2026</p>
+
+          <h2 class="tl_legal_heading"><a class="anchor" name="contact" href="#contact"><i class="anchor-icon"></i></a>Contact</h2>
+          <p>Please contact us if you have any questions or comments about our privacy
+            practices or this Privacy Policy. You can reach us at:</p>
+          <p class="tl_legal_address">
+            PT. Chat Platform Indonesia<br>
+            Jl. Niin No 24<br>
+            Depok, Jawa Barat 16426<br>
+            Indonesia<br>
+            <a href="mailto:privacy@telegraf.chat">privacy@telegraf.chat</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl_page_footer">
+      <a href="https://github.com/heyurw/PyQt4-chat" target="_blank" rel="noopener"
+        class="tl_page_footer_link">&copy;</a> 2017 &ndash; <span id="tl_footer_year"></span>
+      &middot; <a href="/privacy" class="tl_page_footer_link">Privacy</a>
+      &middot; <a href="/terms" class="tl_page_footer_link">Terms</a>
+      <div class="tl_page_footer_org">PT. Chat Platform Indonesia</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var y = document.getElementById('tl_footer_year');
+      if (y) y.textContent = new Date().getFullYear();
+      var saved = null;
+      try { saved = localStorage.getItem('tl-theme'); } catch (e) {}
+      var dark = saved ? (saved === 'dark') :
+        (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('tl-dark');
+    })();
+  </script>
+</body>
+
+</html>
