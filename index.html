@@ -15,6 +15,15 @@
 
   <link href="/css/telegraf.css" rel="stylesheet" media="screen">
   <style>
+    /* Caveat 700, subset to the glyphs this page uses and inlined so the
+       face is available on first paint - no network request, no swap flash. */
+    @font-face {
+      font-family: 'Caveat';
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+      src: url(data:font/woff2;base64,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) format("woff2");
+    }
     :root {
       --tl-bg: #ffffff;
       --tl-fg: #333333;
@@ -31,11 +40,7 @@
       --tl-btn-bg: rgba(255,255,255,0.07);
       --tl-btn-border: rgba(255,255,255,0.16);
     }
-    /* self-contained theme skins, used to re-skin a cloned layer during the reveal */
-    .tl-skin-dark {
-      --tl-bg: #12181f; --tl-fg: #dbe1e8; --tl-muted: #87919e; --tl-accent: #3aa3e8;
-      --tl-btn-bg: rgba(255,255,255,0.07); --tl-btn-border: rgba(255,255,255,0.16);
-    }
+    /* self-contained light skin, used to re-skin the cloned layer during the reveal */
     .tl-skin-light {
       --tl-bg: #ffffff; --tl-fg: #333333; --tl-muted: #8c8c8c; --tl-accent: #179cde;
       --tl-btn-bg: rgba(0,0,0,0.05); --tl-btn-border: rgba(0,0,0,0.12);
@@ -45,10 +50,207 @@
       background: var(--tl-bg);
       color: var(--tl-fg);
     }
-    a.tl_main_download_link_web { color: var(--tl-accent); }
+    a.tl_main_download_link_web {
+      color: var(--tl-accent);
+      font-family: "Caveat", cursive;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: .3px;
+    }
+    a.tl_main_download_link_web strong { font-weight: 700; }
+    /* the stock hover rule draws a straight bar - the scribble replaces it */
+    a.tl_main_download_link_web:after { display: none; }
+    .tl_web_mark {
+      display: block;
+      position: relative;
+      width: 100%;
+      max-width: 296px;
+      margin: 0 auto;
+    }
+    .tl_web_swoosh {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: -2px auto 0;
+      overflow: visible;
+      fill: currentColor;
+      stroke: none;
+      opacity: .9;
+    }
+
+    /* 12.8s cycle. Strokes are cut into segments: each one writes in, then as the
+       eraser passes it thins and fades IN PLACE - rubbed off, not pushed along. */
+    .tl_a1 { animation: k-tl_a1 12.8s linear infinite; transform-origin: center; }
+    @keyframes k-tl_a1 {
+      0%, 0.1% { opacity: 0; }
+      1%       { opacity: 1; }
+      27%       { opacity: 1; }
+      28.05% { opacity: .45; transform: scaleY(.6); }
+      29.1% { opacity: .12; transform: scaleY(.34); }
+      30%         { opacity: 0; transform: scaleY(.25); }
+      100%               { opacity: 0; transform: scaleY(.25); }
+    }
+    .tl_a2 { animation: k-tl_a2 12.8s linear infinite; transform-origin: center; }
+    @keyframes k-tl_a2 {
+      0%, 0.55% { opacity: 0; }
+      1.45%       { opacity: 1; }
+      30%       { opacity: 1; }
+      31.05% { opacity: .45; transform: scaleY(.6); }
+      32.1% { opacity: .12; transform: scaleY(.34); }
+      33%         { opacity: 0; transform: scaleY(.25); }
+      100%               { opacity: 0; transform: scaleY(.25); }
+    }
+    .tl_a3 { animation: k-tl_a3 12.8s linear infinite; transform-origin: center; }
+    @keyframes k-tl_a3 {
+      0%, 1% { opacity: 0; }
+      1.9%       { opacity: 1; }
+      33%       { opacity: 1; }
+      34.05% { opacity: .45; transform: scaleY(.6); }
+      35.1% { opacity: .12; transform: scaleY(.34); }
+      36%         { opacity: 0; transform: scaleY(.25); }
+      100%               { opacity: 0; transform: scaleY(.25); }
+    }
+    .tl_a4 { animation: k-tl_a4 12.8s linear infinite; transform-origin: center; }
+    @keyframes k-tl_a4 {
+      0%, 1.45% { opacity: 0; }
+      2.35%       { opacity: 1; }
+      36%       { opacity: 1; }
+      37.05% { opacity: .45; transform: scaleY(.6); }
+      38.1% { opacity: .12; transform: scaleY(.34); }
+      39%         { opacity: 0; transform: scaleY(.25); }
+      100%               { opacity: 0; transform: scaleY(.25); }
+    }
+    .tl_a5 { animation: k-tl_a5 12.8s linear infinite; transform-origin: center; }
+    @keyframes k-tl_a5 {
+      0%, 1.9% { opacity: 0; }
+      2.8%       { opacity: 1; }
+      39%       { opacity: 1; }
+      40.05% { opacity: .45; transform: scaleY(.6); }
+      41.1% { opacity: .12; transform: scaleY(.34); }
+      42%         { opacity: 0; transform: scaleY(.25); }
+      100%               { opacity: 0; transform: scaleY(.25); }
+    }
+    .tl_a6 { animation: k-tl_a6 12.8s linear infinite; transform-origin: center; }
+    @keyframes k-tl_a6 {
+      0%, 2.35% { opacity: 0; }
+      3.25%       { opacity: 1; }
+      42%       { opacity: 1; }
+      43.05% { opacity: .45; transform: scaleY(.6); }
+      44.1% { opacity: .12; transform: scaleY(.34); }
+      45%         { opacity: 0; transform: scaleY(.25); }
+      100%               { opacity: 0; transform: scaleY(.25); }
+    }
+    .tl_a7 { animation: k-tl_a7 12.8s linear infinite; transform-origin: center; }
+    @keyframes k-tl_a7 {
+      0%, 2.8% { opacity: 0; }
+      3.7%       { opacity: 1; }
+      45%       { opacity: 1; }
+      46.05% { opacity: .45; transform: scaleY(.6); }
+      47.1% { opacity: .12; transform: scaleY(.34); }
+      48%         { opacity: 0; transform: scaleY(.25); }
+      100%               { opacity: 0; transform: scaleY(.25); }
+    }
+    .tl_b1 { animation: k-tl_b1 12.8s linear infinite; transform-origin: center; }
+    @keyframes k-tl_b1 {
+      0%, 50% { opacity: 0; }
+      51%       { opacity: 1; }
+      77%       { opacity: 1; }
+      78.26% { opacity: .45; transform: scaleY(.6); }
+      79.52% { opacity: .12; transform: scaleY(.34); }
+      80.6%         { opacity: 0; transform: scaleY(.25); }
+      100%               { opacity: 0; transform: scaleY(.25); }
+    }
+    .tl_b2 { animation: k-tl_b2 12.8s linear infinite; transform-origin: center; }
+    @keyframes k-tl_b2 {
+      0%, 50.6% { opacity: 0; }
+      51.6%       { opacity: 1; }
+      80.6%       { opacity: 1; }
+      81.86% { opacity: .45; transform: scaleY(.6); }
+      83.12% { opacity: .12; transform: scaleY(.34); }
+      84.2%         { opacity: 0; transform: scaleY(.25); }
+      100%               { opacity: 0; transform: scaleY(.25); }
+    }
+    .tl_b3 { animation: k-tl_b3 12.8s linear infinite; transform-origin: center; }
+    @keyframes k-tl_b3 {
+      0%, 51.2% { opacity: 0; }
+      52.2%       { opacity: 1; }
+      84.2%       { opacity: 1; }
+      85.46% { opacity: .45; transform: scaleY(.6); }
+      86.72% { opacity: .12; transform: scaleY(.34); }
+      87.8%         { opacity: 0; transform: scaleY(.25); }
+      100%               { opacity: 0; transform: scaleY(.25); }
+    }
+    .tl_b4 { animation: k-tl_b4 12.8s linear infinite; transform-origin: center; }
+    @keyframes k-tl_b4 {
+      0%, 51.8% { opacity: 0; }
+      52.8%       { opacity: 1; }
+      87.8%       { opacity: 1; }
+      89.06% { opacity: .45; transform: scaleY(.6); }
+      90.32% { opacity: .12; transform: scaleY(.34); }
+      91.4%         { opacity: 0; transform: scaleY(.25); }
+      100%               { opacity: 0; transform: scaleY(.25); }
+    }
+
+    /* the eraser: sits on the line, jitters as it works across */
+    .tl_web_eraser {
+      position: absolute;
+      left: 0;
+      bottom: 2px;
+      width: 12px;
+      height: 9px;
+      border-radius: 6px;
+      background: currentColor;
+      opacity: 0;
+      pointer-events: none;
+      filter: blur(2.5px);
+      animation: tl-eraser 12.8s linear infinite;
+    }
+    @keyframes tl-eraser {
+      0%, 25.5% { opacity: 0;   transform: translate(20px, 0); }
+      26.5%     { opacity: .34; transform: translate(24px, -3px); }
+      27%      { opacity: .34; transform: translate(28.4px, -3px); }
+      28.6%    { opacity: .34; transform: translate(41.5px, 3px); }
+      30%      { opacity: .34; transform: translate(65.9px, 3px); }
+      31.6%    { opacity: .34; transform: translate(79.0px, -3px); }
+      33%      { opacity: .34; transform: translate(103.4px, -3px); }
+      34.6%    { opacity: .34; transform: translate(116.5px, 3px); }
+      36%      { opacity: .34; transform: translate(140.9px, 3px); }
+      37.6%    { opacity: .34; transform: translate(154.0px, -3px); }
+      39%      { opacity: .34; transform: translate(178.4px, -3px); }
+      40.6%    { opacity: .34; transform: translate(191.5px, 3px); }
+      42%      { opacity: .34; transform: translate(215.9px, 3px); }
+      43.6%    { opacity: .34; transform: translate(229.0px, -3px); }
+      45%      { opacity: .34; transform: translate(253.4px, -3px); }
+      47%       { opacity: .34; transform: translate(268px, 2px); }
+      49.5%     { opacity: 0;   transform: translate(286px, 0); }
+      75.5%     { opacity: 0;   transform: translate(100px, 0); }
+      76.5%     { opacity: .34; transform: translate(104px, -3px); }
+      77.0%    { opacity: .34; transform: translate(107.4px, -3px); }
+      79.0%    { opacity: .34; transform: translate(117.0px, 3px); }
+      80.6%    { opacity: .34; transform: translate(134.7px, 3px); }
+      82.6%    { opacity: .34; transform: translate(144.2px, -3px); }
+      84.2%    { opacity: .34; transform: translate(161.9px, -3px); }
+      86.2%    { opacity: .34; transform: translate(171.5px, 3px); }
+      87.8%    { opacity: .34; transform: translate(189.2px, 3px); }
+      90%       { opacity: .34; transform: translate(205px, 2px); }
+      93%       { opacity: 0;   transform: translate(222px, 0); }
+      100%      { opacity: 0;   transform: translate(222px, 0); }
+    }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tl_web_swoosh * { animation: none !important; opacity: 1 !important; transform: none !important; }
+      .tl_ink_b { display: none; }
+      .tl_web_eraser { display: none; }
+    }
     .tl_page_footer { color: var(--tl-muted); }
     .tl_page_footer_link { color: var(--tl-muted); }
     .tl_page_footer_org { color: var(--tl-muted); }
+    .tl_page_footer_org a.tl_page_footer_link { color: inherit; }
+    .tl_page_footer_org a.tl_page_footer_link:hover {
+      color: var(--tl-accent);
+      text-decoration: none;
+    }
 
     .tl-theme-toggle {
       position: fixed;
@@ -135,7 +337,39 @@
           <div class="tl_main_download_mobile clearfix">
             <div class="tl_main_download_mobile clearfix">
               <a href="https://web.telegraf.chat" target="_blank" rel="noopener" class="tl_main_download_link tl_main_download_link_web">
-                <i class="icon icon-web"></i>Try the <strong>web</strong> client</a>
+Layanan di aplikasi web terbaru
+                <span class="tl_web_mark"><svg class="tl_web_swoosh" viewBox="0 0 521 30" aria-hidden="true" focusable="false">
+                  <defs>
+                    <clipPath id="tlSegA1"><rect x="30" y="-10" width="69" height="50"/></clipPath>
+                    <clipPath id="tlSegA2"><rect x="96" y="-10" width="69" height="50"/></clipPath>
+                    <clipPath id="tlSegA3"><rect x="162" y="-10" width="69" height="50"/></clipPath>
+                    <clipPath id="tlSegA4"><rect x="228" y="-10" width="69" height="50"/></clipPath>
+                    <clipPath id="tlSegA5"><rect x="294" y="-10" width="69" height="50"/></clipPath>
+                    <clipPath id="tlSegA6"><rect x="360" y="-10" width="69" height="50"/></clipPath>
+                    <clipPath id="tlSegA7"><rect x="426" y="-10" width="69" height="50"/></clipPath>
+                    <clipPath id="tlSegB1"><rect x="180" y="-10" width="51" height="50"/></clipPath>
+                    <clipPath id="tlSegB2"><rect x="228" y="-10" width="51" height="50"/></clipPath>
+                    <clipPath id="tlSegB3"><rect x="276" y="-10" width="51" height="50"/></clipPath>
+                    <clipPath id="tlSegB4"><rect x="324" y="-10" width="51" height="50"/></clipPath>
+                  </defs>
+
+                  <g class="tl_ink_a">
+                    <g clip-path="url(#tlSegA1)"><path class="tl_a1" d="M39.5 16.8 C 128 9.4, 250 5.4, 356 5.2 C 412 5.1, 456 5.9, 484 7.2 C 454 8.4, 408 8.6, 352 9.2 C 246 10.4, 132 15, 43.5 22.8 C 40.6 23.1, 38.2 22.4, 37.3 21.2 C 36.2 19.8, 37.2 17.6, 39.5 16.8 Z"/></g>
+                    <g clip-path="url(#tlSegA2)"><path class="tl_a2" d="M39.5 16.8 C 128 9.4, 250 5.4, 356 5.2 C 412 5.1, 456 5.9, 484 7.2 C 454 8.4, 408 8.6, 352 9.2 C 246 10.4, 132 15, 43.5 22.8 C 40.6 23.1, 38.2 22.4, 37.3 21.2 C 36.2 19.8, 37.2 17.6, 39.5 16.8 Z"/></g>
+                    <g clip-path="url(#tlSegA3)"><path class="tl_a3" d="M39.5 16.8 C 128 9.4, 250 5.4, 356 5.2 C 412 5.1, 456 5.9, 484 7.2 C 454 8.4, 408 8.6, 352 9.2 C 246 10.4, 132 15, 43.5 22.8 C 40.6 23.1, 38.2 22.4, 37.3 21.2 C 36.2 19.8, 37.2 17.6, 39.5 16.8 Z"/></g>
+                    <g clip-path="url(#tlSegA4)"><path class="tl_a4" d="M39.5 16.8 C 128 9.4, 250 5.4, 356 5.2 C 412 5.1, 456 5.9, 484 7.2 C 454 8.4, 408 8.6, 352 9.2 C 246 10.4, 132 15, 43.5 22.8 C 40.6 23.1, 38.2 22.4, 37.3 21.2 C 36.2 19.8, 37.2 17.6, 39.5 16.8 Z"/></g>
+                    <g clip-path="url(#tlSegA5)"><path class="tl_a5" d="M39.5 16.8 C 128 9.4, 250 5.4, 356 5.2 C 412 5.1, 456 5.9, 484 7.2 C 454 8.4, 408 8.6, 352 9.2 C 246 10.4, 132 15, 43.5 22.8 C 40.6 23.1, 38.2 22.4, 37.3 21.2 C 36.2 19.8, 37.2 17.6, 39.5 16.8 Z"/></g>
+                    <g clip-path="url(#tlSegA6)"><path class="tl_a6" d="M39.5 16.8 C 128 9.4, 250 5.4, 356 5.2 C 412 5.1, 456 5.9, 484 7.2 C 454 8.4, 408 8.6, 352 9.2 C 246 10.4, 132 15, 43.5 22.8 C 40.6 23.1, 38.2 22.4, 37.3 21.2 C 36.2 19.8, 37.2 17.6, 39.5 16.8 Z"/></g>
+                    <g clip-path="url(#tlSegA7)"><path class="tl_a7" d="M39.5 16.8 C 128 9.4, 250 5.4, 356 5.2 C 412 5.1, 456 5.9, 484 7.2 C 454 8.4, 408 8.6, 352 9.2 C 246 10.4, 132 15, 43.5 22.8 C 40.6 23.1, 38.2 22.4, 37.3 21.2 C 36.2 19.8, 37.2 17.6, 39.5 16.8 Z"/></g>
+                  </g>
+
+                  <g class="tl_ink_b">
+                    <g clip-path="url(#tlSegB1)"><path class="tl_b1" d="M188 14.4 C 232 10.2, 292 8.2, 344 8.4 C 356 8.45, 363 8.8, 366 9.4 C 362 10.3, 355 10.5, 342 10.6 C 290 11, 232 13.4, 190 18.2 C 187.4 18.5, 185.4 17.9, 184.8 16.9 C 184 15.7, 185.7 14.7, 188 14.4 Z"/></g>
+                    <g clip-path="url(#tlSegB2)"><path class="tl_b2" d="M188 14.4 C 232 10.2, 292 8.2, 344 8.4 C 356 8.45, 363 8.8, 366 9.4 C 362 10.3, 355 10.5, 342 10.6 C 290 11, 232 13.4, 190 18.2 C 187.4 18.5, 185.4 17.9, 184.8 16.9 C 184 15.7, 185.7 14.7, 188 14.4 Z"/></g>
+                    <g clip-path="url(#tlSegB3)"><path class="tl_b3" d="M188 14.4 C 232 10.2, 292 8.2, 344 8.4 C 356 8.45, 363 8.8, 366 9.4 C 362 10.3, 355 10.5, 342 10.6 C 290 11, 232 13.4, 190 18.2 C 187.4 18.5, 185.4 17.9, 184.8 16.9 C 184 15.7, 185.7 14.7, 188 14.4 Z"/></g>
+                    <g clip-path="url(#tlSegB4)"><path class="tl_b4" d="M188 14.4 C 232 10.2, 292 8.2, 344 8.4 C 356 8.45, 363 8.8, 366 9.4 C 362 10.3, 355 10.5, 342 10.6 C 290 11, 232 13.4, 190 18.2 C 187.4 18.5, 185.4 17.9, 184.8 16.9 C 184 15.7, 185.7 14.7, 188 14.4 Z"/></g>
+                  </g>
+                </svg><span class="tl_web_eraser"></span></span></a>
             </div>
           </div>
 
@@ -145,11 +379,12 @@
     </div>
 
     <div class="tl_page_footer">
-      <a href="https://github.com/heyurw/PyQt4-chat" target="_blank" rel="noopener"
-        class="tl_page_footer_link">&copy;</a> 2017 &ndash; <span id="tl_footer_year"></span>
-      &middot; <a href="/privacy" class="tl_page_footer_link">Privacy</a>
-      &middot; <a href="/terms" class="tl_page_footer_link">Terms</a>
-      <div class="tl_page_footer_org">PT. Chat Platform Indonesia</div>
+      <a href="/privacy" class="tl_page_footer_link">Kebijakan Privasi</a>
+      &middot; <a href="/terms" class="tl_page_footer_link">Ketentuan Penggunaan</a>
+      <div class="tl_page_footer_org"><a href="/"
+          class="tl_page_footer_link">PT. Chat Platform Indonesia</a>
+        &copy; 2017&ndash;<span id="tl_footer_year"></span>
+      </div>
     </div>
   </div>
 
