@@ -1,0 +1,99 @@
+/* Top bar and footer state shared by the secondary pages (/pricing, /privacy,
+   /terms). The homepage has neither: it keeps its single call to action. */
+
+/* Wordmark face: Roboto Medium (Apache 2.0), subset to the letters of
+   "Telegraf" and inlined so it is there on first paint. Set dark grey and
+   tight, the way telegram.org draws its own wordmark. */
+@font-face {
+  font-family: 'Telegraf Wordmark';
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url(data:font/woff2;base64,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) format('woff2');
+}
+:root,
+.tl-skin-light { --tl-wordmark: #4d4d4d; }
+html.tl-dark { --tl-wordmark: #e6ebf0; }
+
+/* Sits on the same 40px line as the fixed theme toggle (top: 20px). */
+.tl_sub_head {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  padding: 0 24px;
+}
+
+.tl_sub_brand,
+.tl_sub_brand:hover,
+.tl_sub_brand:focus {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--tl-wordmark);
+  font-family: 'Telegraf Wordmark', Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  text-decoration: none;
+}
+.tl_sub_brand img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+/* The bar already gives the page its top spacing. */
+.tl_sub_head + .tl_page_container { margin-top: 20px; }
+
+/* Current page in the footer: plain text, not a link. */
+.tl_page_footer_current { color: var(--tl-fg); }
+
+/* Back to top: telegram.org's left-edge strip (base rules in telegraf.css),
+   scaled down and themed. It only shows once the top bar has scrolled away,
+   so it runs the full height of the window. The link itself is an invisible
+   hit area that back-to-top.js stretches across the left margin; only the
+   96px strip inside it is drawn. The label lines up with the theme toggle. */
+.back_to_top_wrap {
+  top: 0;
+  z-index: 5;
+  color: var(--tl-accent);
+}
+.back_to_top_wrap:hover,
+.back_to_top_wrap:focus {
+  color: var(--tl-accent);
+  text-decoration: none;
+  outline: none; /* no focus ring after a click; keyboard focus gets the tint */
+}
+.back_to_top {
+  width: 96px;
+  height: 100%;
+  font-size: 13px;
+  padding: 30px 12px 0 6px;
+}
+.back_to_top_wrap:hover .back_to_top,
+.back_to_top_wrap:focus-visible .back_to_top { background: rgba(174, 198, 215, 0.2); }
+html.tl-dark .back_to_top_wrap:hover .back_to_top,
+html.tl-dark .back_to_top_wrap:focus-visible .back_to_top { background: rgba(174, 198, 215, 0.08); }
+.tl_to_top_ic {
+  display: inline-block;
+  width: 13px;
+  height: 7px;
+  margin-right: 9px;
+  vertical-align: 1px;
+  fill: none;
+  stroke: var(--tl-accent);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* back-to-top.js sizes the strip to the margin and flags it when the margin
+   is too narrow to hold it clear of the content. */
+.back_to_top_wrap.back_to_top_no_room { display: none; }
+
+@media (max-width: 767px) {
+  .tl_sub_head { padding: 0 16px; }
+  .tl_sub_brand, .tl_sub_brand:hover, .tl_sub_brand:focus { font-size: 20px; }
+  .tl_sub_head + .tl_page_container { margin-top: 8px; }
+}

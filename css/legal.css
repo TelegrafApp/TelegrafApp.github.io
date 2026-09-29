@@ -1,6 +1,8 @@
 /* Shared styles for the standalone legal pages (/privacy, /terms). */
 
-:root {
+/* .tl-skin-light re-skins the cloned page during the theme reveal. */
+:root,
+.tl-skin-light {
   --tl-bg: #ffffff;
   --tl-fg: #333333;
   --tl-muted: #8c8c8c;
