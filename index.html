@@ -55,55 +55,113 @@
       text-decoration: none;
     }
 
-    /* Handwritten note pointing down at the footer "Harga" link */
-    .tl_price_hint { position: relative; }
-    .tl_price_note {
+    /* Hero: one sentence, "Satu Aplikasi dengan Harga tetap untuk
+       Chat^kebutuhan." - "Harga tetap" links to /pricing; "kebutuhan" is
+       raised like an exponent on Chat. */
+    :root, .tl-skin-light {
+      --tl-brand-text: #1d1d1f;
+      --tl-chat: #8b3dff;
+    }
+    html.tl-dark {
+      --tl-brand-text: #f5f5f7;
+      --tl-chat: #a974ff;
+    }
+    .tl_main_page_container {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 0;
+      padding: 0 16px 40px;
+    }
+    .tl_hero {
+      text-align: center;
+      padding: 72px 0 24px; /* room for the note above "Harga tetap" */
+    }
+    .tl_hero_title {
+      margin: 0;
+      color: var(--tl-muted); /* connecting words; key words override below */
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      font-size: clamp(26px, 6.5vw, 44px);
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+    .tl_hero_brand { color: var(--tl-brand-text); }
+    .tl_hero_chat { color: var(--tl-chat); font-style: italic; }
+    .tl_hero_sup {
+      margin-left: 0.25em; /* clear the slant of the italic "t" */
+      font-size: 0.5em;
+      font-style: normal;
+      line-height: 0;
+      vertical-align: 0.9em;
+    }
+    .tl_hero_price {
+      position: relative;
+      white-space: nowrap;
+      color: var(--tl-accent); /* same blue as the Premium plan on /pricing */
+    }
+    .tl_hero_price:hover,
+    .tl_hero_price:focus {
+      color: var(--tl-accent);
+      text-decoration: none;
+    }
+
+    /* Handwritten note above "Harga tetap", arrow pointing down at it */
+    .tl_hero_note {
       position: absolute;
-      right: 100%;
+      left: 45%;
       bottom: 100%;
-      margin-right: -28px;
       margin-bottom: 2px;
-      width: 120px;
+      width: 150px;
       color: var(--tl-fg);
+      letter-spacing: 0;
+      text-align: left;
       pointer-events: none;
     }
-    .tl_price_note svg {
+    .tl_hero_note > span {
+      display: block;
+      padding-left: 44px;
+      font-family: "Caveat", cursive;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1.05;
+      transform: rotate(-4deg);
+    }
+    .tl_hero_note svg {
       display: block;
       width: 64px;
       height: 40px;
-      margin-left: 60px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
-    .tl_price_note > span {
-      display: block;
-      font-family: "Caveat", cursive;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 1.05;
-      text-align: center;
-      transform: rotate(-4deg);
-    }
-    /* Not enough room left of the footer on phones - mirror the note to the right */
+    .tl_hero_note .tl_note_arrow_m,
+    .tl_br_m { display: none; }
+    /* Phones: break as "Satu Aplikasi dengan / Harga tetap / untuk
+       Chat^kebutuhan." and put the note beside "Harga tetap" with a short
+       arrow pointing left at it, so no gap opens up between the lines. */
     @media (max-width: 480px) {
-      .tl_price_note {
-        right: auto;
-        left: 8px;
-        margin-right: 0;
-        width: 140px;
+      .tl_hero { padding-top: 24px; }
+      .tl_hero_title { font-size: clamp(22px, 7vw, 30px); }
+      .tl_br_m { display: inline; }
+      /* reserve the note's width on the line so "Harga tetap" + note centre together */
+      .tl_hero_price { margin-right: 86px; }
+      .tl_hero_note {
+        left: 100%;
+        top: 50%;
+        bottom: auto;
+        width: auto;
+        margin: 0 0 0 2px;
+        display: flex;
+        align-items: center;
+        transform: translateY(-50%);
       }
-      .tl_price_note svg {
-        margin-left: 0;
-        transform: scaleX(-1);
-      }
-      .tl_price_note > span {
-        text-align: left;
-        padding-left: 40px;
-        transform: rotate(4deg);
-      }
+      .tl_hero_note > span { font-size: 15px; padding-left: 2px; }
+      .tl_hero_note .tl_note_arrow_d { display: none; }
+      .tl_hero_note .tl_note_arrow_m { display: block; width: 22px; height: 16px; }
     }
   </style>
 </head>
@@ -134,26 +192,24 @@
     <div class="container clearfix tl_page_container tl_main_page_container">
       <div class="tl_page">
         <div class="tl_main_wrap">
-          <div class="tl_main_head">
-            <div class="tl_main_logo_wrap">
-              <div class="tl_main_logo_placeholder"></div>
-              <h3 class="tl_main_body_header" style="visibility:hidden;">Telegraf</h3>
-              <p class="tl_main_logo_lead" style="visibility:hidden;">for you telegram server</p>
-            </div>
+          <div class="tl_hero">
+            <h1 class="tl_hero_title">
+              Satu <span class="tl_hero_brand">Aplikasi</span> dengan<br class="tl_br_m">
+              <a href="/pricing" class="tl_hero_price"><span class="tl_hero_note" aria-hidden="true">
+                  <svg class="tl_note_arrow_m" viewBox="0 0 24 16"><path d="M22 4 C 15 2, 8 5, 3 9"/><path d="M8 4 L 3 9 L 9 12"/></svg>
+                  <span>Gratis hingga<br>3 agen</span>
+                  <svg class="tl_note_arrow_d" viewBox="0 0 64 40"><path d="M52 3 C 30 4, 14 12, 12 34"/><path d="M6 28 L 12 35 L 19 29"/></svg>
+                </span>Harga tetap</a><br>
+              untuk <span class="tl_hero_chat">Chat<sup class="tl_hero_sup">kebutuhan</sup></span>.
+            </h1>
           </div>
-
-
         </div>
 
       </div>
     </div>
 
     <div class="tl_page_footer">
-      <span class="tl_price_hint"><span class="tl_price_note" aria-hidden="true">
-          <span>Gratis hingga<br>3 agen</span>
-          <svg viewBox="0 0 64 40"><path d="M14 3 C 34 2, 52 10, 54 34"/><path d="M48 28 L 54 35 L 60 28"/></svg>
-        </span><a href="/pricing" class="tl_page_footer_link">Harga</a></span>
-      &middot; <a href="/privacy" class="tl_page_footer_link">Kebijakan Privasi</a>
+      <a href="/privacy" class="tl_page_footer_link">Kebijakan Privasi</a>
       &middot; <a href="/terms" class="tl_page_footer_link">Ketentuan Penggunaan</a>
       <div class="tl_page_footer_org"><a href="/"
           class="tl_page_footer_link">PT. Chat Platform Indonesia</a>
