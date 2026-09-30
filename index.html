@@ -73,16 +73,6 @@
       text-decoration: none;
     }
 
-    /* Hero: "Chat Platform [flag]" - the flag sits in thin brackets,
-       DevDay [2026] style. */
-    :root, .tl-skin-light {
-      --tl-brand-text: #1d1d1f;
-      --tl-chat: #8b3dff;
-    }
-    html.tl-dark {
-      --tl-brand-text: #f5f5f7;
-      --tl-chat: #a974ff;
-    }
     .tl_main_page_container {
       flex: 1 0 auto;
       margin-top: 0;
@@ -91,7 +81,7 @@
     /* The hero takes the first screen minus --tl-peek, so the top of the
        pricing section (title and the tops of the plan cards) shows below it
        as a preview under a blur veil; the veil lifts on scroll. */
-    :root { --tl-peek: 520px; }
+    :root { --tl-peek: 480px; }
     .tl_hero {
       display: flex;
       flex-direction: column;
@@ -100,7 +90,7 @@
       min-height: 360px;
       min-height: max(360px, calc(100vh - var(--tl-peek)));
       min-height: max(360px, calc(100svh - var(--tl-peek)));
-      padding: 48px 0 0;
+      padding: 48px 0 56px;
       text-align: center;
     }
     #harga { padding-top: 0; scroll-margin-top: 24px; }
@@ -111,42 +101,41 @@
       :root { --tl-peek: 450px; }
       .tl_hero { min-height: max(300px, calc(100svh - var(--tl-peek))); }
     }
-    .tl_hero_title {
+    /* Hero frame: a box filled with the logo's gradient, reading "Chat" and
+       a business word that keeps changing (js/hero-words.js). The logo art
+       is a circle; at 142% (just over the square's diagonal) the box sits
+       wholly inside it, so only the gradient shows. */
+    .tl_frame {
+      --tl-frame: min(180px, 42vw, calc((100svh - var(--tl-peek) - 104px) / 1.1));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: var(--tl-frame);
+      height: var(--tl-frame);
       margin: 0;
-      color: var(--tl-muted);
+      padding: calc(var(--tl-frame) * 0.09);
+      background: #2a9df4 url(/img/t_logo.png) center / 142% no-repeat;
+      border-radius: calc(var(--tl-frame) * 0.035);
+      box-shadow: 0 14px 34px rgba(23, 156, 222, 0.22);
+      color: #000000;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      font-size: clamp(26px, 6.5vw, 44px);
-      font-weight: 500;
-      line-height: 1.35;
-      letter-spacing: -0.02em;
+      font-size: calc(var(--tl-frame) * 0.125);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-align: left;
     }
-    .tl_hero_chat { color: var(--tl-chat); }
-    .tl_hero_tag { white-space: nowrap; }
-    .tl_hero_bracket {
-      color: var(--tl-brand-text);
-      font-weight: 200;
+    .tl_frame_word {
+      align-self: flex-end;
+      white-space: nowrap;
     }
-    .tl_hero_flag {
-      display: inline-block;
-      width: 0.8em;
-      height: 0.58em;
-      margin: 0 0.1em;
-      vertical-align: 0.02em;
-      /* thin edge so the white half doesn't vanish on a white page */
-      filter: drop-shadow(0 0 0.4px rgba(0, 0, 0, 0.45))
-              drop-shadow(0 0.5px 0.5px rgba(0, 0, 0, 0.15));
-      transform-origin: 10% 60%;
-      animation: tl-flag-wave 2.8s ease-in-out infinite;
-    }
-    @keyframes tl-flag-wave {
-      0%, 100% { transform: rotate(-4deg); }
-      50%      { transform: rotate(3deg) translateY(-0.03em); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .tl_hero_flag { animation: none; transform: rotate(-4deg); }
-    }
-    .tl_hero_accent {
-      color: var(--tl-accent); /* same blue as the Premium plan below */
+    .tl_sr_only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
     }
 
     /* "hingga 3 agen CRM", handwritten and slightly tilted like a note,
@@ -181,7 +170,7 @@
 
     /* The veil over the preview: fades the bottom of the screen into the
        page background, holds the pinned footer copy and takes clicks.
-       js/pricing.js sets its top edge (just above the "Pilih paket" title). */
+       js/pricing.js sets its top edge (just above the "Intip paket" title). */
     .tl_veil {
       position: fixed;
       left: 0;
@@ -223,9 +212,6 @@
       cursor: default;
     }
 
-    @media (max-width: 480px) {
-      .tl_hero_title { font-size: clamp(22px, 7vw, 30px); }
-    }
   </style>
 </head>
 
@@ -256,9 +242,9 @@
       <div class="tl_page">
         <div class="tl_main_wrap">
           <div class="tl_hero">
-            <h1 class="tl_hero_title">
-              <span class="tl_hero_accent">Chat</span> <span class="tl_hero_chat">Platform</span>
-              <span class="tl_hero_tag"><span class="tl_hero_bracket">[</span><!-- Twemoji flag (CC-BY 4.0, github.com/jdecked/twemoji), red softened --><svg class="tl_hero_flag" viewBox="0 5 36 26" role="img" aria-label="Indonesia"><path fill="#f28b8b" d="M32 5H4C1.791 5 0 6.791 0 9v9h36V9c0-2.209-1.791-4-4-4z"/><path fill="#EEE" d="M36 27c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4v-9h36v9z"/></svg><span class="tl_hero_bracket">]</span></span>
+            <h1 class="tl_frame">
+              <span>Chat</span><span class="tl_sr_only"> Platform</span>
+              <span class="tl_frame_word" aria-hidden="true">CRM</span>
             </h1>
           </div>
 
@@ -266,7 +252,7 @@
 
           <section class="tl_pricing_wrap" id="harga" aria-labelledby="tl_pricing_title">
             <div class="tl_pricing_hero">
-              <h2 class="tl_pricing_title" id="tl_pricing_title">Pilih paket yang dirancang untuk bisnis.</h2>
+              <h2 class="tl_pricing_title" id="tl_pricing_title">Intip paket yang dirancang untuk bisnis.</h2>
               <p class="tl_pricing_lead">Atau mulai secara gratis.</p>
             </div>
 
@@ -448,6 +434,7 @@
       document.getElementById('tl_footer_year').textContent = new Date().getFullYear();
     })();
   </script>
+  <script src="/js/hero-words.js"></script>
   <script src="/js/pricing.js"></script>
   <script src="/js/theme-toggle.js"></script>
   <script src="/js/back-to-top.js"></script>
