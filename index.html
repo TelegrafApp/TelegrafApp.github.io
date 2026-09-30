@@ -55,8 +55,8 @@
       text-decoration: none;
     }
 
-    /* Hero: "Satu Aplikasi Satu Harga Satu Platform^chat" - "Harga" links
-       to /pricing; "chat" is raised like an exponent on Platform. */
+    /* Hero: "Satu Aplikasi Satu Harga Chat Platform [flag]" - "Harga" links
+       to /pricing; the flag sits in thin brackets, DevDay [2026] style. */
     :root, .tl-skin-light {
       --tl-brand-text: #1d1d1f;
       --tl-chat: #8b3dff;
@@ -87,13 +87,30 @@
       letter-spacing: -0.02em;
     }
     .tl_hero_brand { color: var(--tl-brand-text); }
-    .tl_hero_chat { color: var(--tl-chat); font-style: italic; }
-    .tl_hero_sup {
-      margin-left: 0.25em; /* clear the slant of the italic "t" */
-      font-size: 0.5em;
-      font-style: normal;
-      line-height: 0;
-      vertical-align: 0.9em;
+    .tl_hero_chat { color: var(--tl-chat); }
+    .tl_hero_tag { white-space: nowrap; }
+    .tl_hero_bracket {
+      color: var(--tl-brand-text);
+      font-weight: 200;
+    }
+    .tl_hero_flag {
+      display: inline-block;
+      width: 0.8em;
+      height: 0.58em;
+      margin: 0 0.1em;
+      vertical-align: 0.02em;
+      /* thin edge so the white half doesn't vanish on a white page */
+      filter: drop-shadow(0 0 0.4px rgba(0, 0, 0, 0.45))
+              drop-shadow(0 0.5px 0.5px rgba(0, 0, 0, 0.15));
+      transform-origin: 10% 60%;
+      animation: tl-flag-wave 2.8s ease-in-out infinite;
+    }
+    @keyframes tl-flag-wave {
+      0%, 100% { transform: rotate(-4deg); }
+      50%      { transform: rotate(3deg) translateY(-0.03em); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tl_hero_flag { animation: none; transform: rotate(-4deg); }
     }
     .tl_hero_price {
       position: relative;
@@ -144,7 +161,7 @@
     }
     .tl_hero_note .tl_note_arrow_m,
     .tl_br_m { display: none; }
-    /* Phones: break as "Satu Aplikasi / Satu Harga / Satu Platform^chat"
+    /* Phones: break as "Satu Aplikasi / Satu Harga / Chat Platform [flag]"
        and put the note beside "Harga" with a short
        arrow pointing left at it, so no gap opens up between the lines. */
     @media (max-width: 480px) {
@@ -204,7 +221,8 @@
                   <span>Klik untuk pemakaian<br>gratis hingga 3 agen <span class="tl_note_caps">CRM</span></span>
                   <svg class="tl_note_arrow_d" viewBox="0 0 64 40"><path d="M52 3 C 30 4, 14 12, 12 34"/><path d="M6 28 L 12 35 L 19 29"/></svg>
                 </span>Harga</a><br>
-              Satu <span class="tl_hero_chat">Platform<sup class="tl_hero_sup">chat</sup></span>
+              <span class="tl_hero_brand">Chat</span> <span class="tl_hero_chat">Platform</span>
+              <span class="tl_hero_tag"><span class="tl_hero_bracket">[</span><!-- Twemoji flag (CC-BY 4.0, github.com/jdecked/twemoji), red softened --><svg class="tl_hero_flag" viewBox="0 5 36 26" role="img" aria-label="Indonesia"><path fill="#f28b8b" d="M32 5H4C1.791 5 0 6.791 0 9v9h36V9c0-2.209-1.791-4-4-4z"/><path fill="#EEE" d="M36 27c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4v-9h36v9z"/></svg><span class="tl_hero_bracket">]</span></span>
             </h1>
           </div>
         </div>
