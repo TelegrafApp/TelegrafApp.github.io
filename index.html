@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
   <meta charset="utf-8">
@@ -8,22 +8,40 @@
   <meta property="og:title" content="Telegraf App">
   <meta property="og:image" content="/img/t_logo.png">
   <meta property="og:site_name" content="Telegraf">
-  <meta property="og:description" content="">
+  <meta property="og:description" content="Mulai gratis untuk hingga 3 agen, atau buka seluruh fitur Telegraf dengan satu harga flat per bulan.">
 
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <script>
+    // Apply the saved (or system) theme before first paint, so dark mode
+    // doesn't flash light or fade the hero pill in. theme-toggle.js does the rest.
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('tl-theme'); } catch (e) {}
+      var root = document.documentElement;
+      if (t ? t === 'dark' : (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches))
+        root.classList.add('tl-dark');
+      // Start the pricing preview blurred on first paint; js/pricing.js takes
+      // over from here (and lifts it if the page opens scrolled down).
+      root.classList.add('tl-preview');
+      root.style.setProperty('--tl-blur', '1');
+    })();
+  </script>
   <link href="/css/bootstrap.min.css" rel="stylesheet">
 
   <link href="/css/telegraf.css" rel="stylesheet" media="screen">
+  <link href="/css/pricing.css" rel="stylesheet" media="screen">
   <link href="/css/theme-toggle.css" rel="stylesheet" media="screen">
+  <link href="/css/subpage.css" rel="stylesheet" media="screen">
   <style>
-    /* Caveat 700, subset to the glyphs this page uses and inlined so the
-       face is available on first paint - no network request, no swap flash. */
+    /* Caveat 700, subset to the glyphs of "Gratis hingga 3 agen CRM" and
+       inlined so the face is available on first paint - no network request,
+       no swap flash. */
     @font-face {
       font-family: 'Caveat';
       font-style: normal;
       font-weight: 700;
       font-display: block;
-      src: url(data:font/woff2;base64,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) format("woff2");
+      src: url(data:font/woff2;base64,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) format("woff2");
     }
     :root {
       --tl-bg: #ffffff;
@@ -55,8 +73,8 @@
       text-decoration: none;
     }
 
-    /* Hero: "Satu Aplikasi Satu Harga Chat Platform [flag]" - "Harga" links
-       to /pricing; the flag sits in thin brackets, DevDay [2026] style. */
+    /* Hero: "Chat Platform [flag]" - the flag sits in thin brackets,
+       DevDay [2026] style. */
     :root, .tl-skin-light {
       --tl-brand-text: #1d1d1f;
       --tl-chat: #8b3dff;
@@ -67,26 +85,41 @@
     }
     .tl_main_page_container {
       flex: 1 0 auto;
+      margin-top: 0;
+      padding: 0 16px;
+    }
+    /* The hero takes the first screen minus --tl-peek, so the top of the
+       pricing section (title and the tops of the plan cards) shows below it
+       as a preview under a blur veil; the veil lifts on scroll. */
+    :root { --tl-peek: 520px; }
+    .tl_hero {
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
-      margin-top: 0;
-      padding: 0 16px 40px;
-    }
-    .tl_hero {
+      min-height: 360px;
+      min-height: max(360px, calc(100vh - var(--tl-peek)));
+      min-height: max(360px, calc(100svh - var(--tl-peek)));
+      padding: 48px 0 0;
       text-align: center;
-      padding: 72px 0 24px; /* room for the note above "Harga" */
+    }
+    #harga { padding-top: 0; scroll-margin-top: 24px; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
+    @media (max-width: 767px) {
+      :root { --tl-peek: 450px; }
+      .tl_hero { min-height: max(300px, calc(100svh - var(--tl-peek))); }
     }
     .tl_hero_title {
       margin: 0;
-      color: var(--tl-muted); /* connecting words; key words override below */
+      color: var(--tl-muted);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
       font-size: clamp(26px, 6.5vw, 44px);
       font-weight: 500;
       line-height: 1.35;
       letter-spacing: -0.02em;
     }
-    .tl_hero_brand { color: var(--tl-brand-text); }
     .tl_hero_chat { color: var(--tl-chat); }
     .tl_hero_tag { white-space: nowrap; }
     .tl_hero_bracket {
@@ -112,77 +145,86 @@
     @media (prefers-reduced-motion: reduce) {
       .tl_hero_flag { animation: none; transform: rotate(-4deg); }
     }
-    .tl_hero_price {
-      position: relative;
-      white-space: nowrap;
-      color: var(--tl-accent); /* same blue as the Premium plan on /pricing */
-      text-decoration: none;
-      text-underline-offset: 0.14em;
-    }
-    .tl_hero_price:hover,
-    .tl_hero_price:focus {
-      color: var(--tl-accent);
-      text-decoration: underline;
-      text-decoration-thickness: 0.1em;
+    .tl_hero_accent {
+      color: var(--tl-accent); /* same blue as the Premium plan below */
     }
 
-    /* Handwritten note above "Harga", arrow pointing down at it */
-    .tl_hero_note {
-      position: absolute;
-      left: 45%;
-      bottom: 100%;
-      margin-bottom: 2px;
-      width: 240px;
+    /* "hingga 3 agen CRM", handwritten and slightly tilted like a note,
+       beside the "Gratis" plan name. */
+    .tl_pricing_note {
+      display: inline-block;
+      margin-left: 8px;
+      vertical-align: baseline;
+      transform-origin: 0 80%; /* tilt from its start, on the heading's baseline */
       color: var(--tl-fg);
-      letter-spacing: 0;
-      text-align: left;
-      pointer-events: none;
-    }
-    .tl_hero_note > span {
-      display: block;
-      padding-left: 44px;
       font-family: "Caveat", cursive;
-      font-weight: 700;
       font-size: 20px;
+      font-weight: 700;
       line-height: 1.05;
       transform: rotate(-4deg);
     }
     /* handwritten capitals run tall - bring "CRM" down to lowercase height */
-    .tl_hero_note .tl_note_caps { font-size: 0.78em; }
-    .tl_hero_note svg {
-      display: block;
-      width: 64px;
-      height: 40px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    .tl_hero_note .tl_note_arrow_m,
-    .tl_br_m { display: none; }
-    /* Phones: break as "Satu Aplikasi / Satu Harga / Chat Platform [flag]"
-       and put the note beside "Harga" with a short
-       arrow pointing left at it, so no gap opens up between the lines. */
+    .tl_pricing_note .tl_note_caps { font-size: 0.78em; }
     @media (max-width: 480px) {
-      .tl_hero { padding-top: 24px; }
+      .tl_pricing_note { font-size: 18px; }
+    }
+
+    /* Pricing preview. While html.tl-preview is set (top of the page),
+       js/pricing.js scales --tl-blur from 1 down to 0 over the first scroll.
+       The blur is a plain filter on the elements themselves, stepped from
+       the title (barely soft) to the plan cards (out of focus); unlike a
+       backdrop-filter veil it is drawn once and reused, so the theme
+       switch's circular reveal stays smooth over it. */
+    .tl-preview #harga .tl_pricing_title { filter: blur(calc(var(--tl-blur) * 1.2px)); }
+    .tl-preview #harga .tl_pricing_lead { filter: blur(calc(var(--tl-blur) * 1.5px)); }
+    .tl-preview #harga .tl_plans { filter: blur(calc(var(--tl-blur) * 7px)); }
+
+    /* The veil over the preview: fades the bottom of the screen into the
+       page background, holds the pinned footer copy and takes clicks.
+       js/pricing.js sets its top edge (just above the "Pilih paket" title). */
+    .tl_veil {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
+      cursor: pointer;
+    }
+    .tl_veil[hidden] { display: none; }
+    /* Until js/pricing.js measures it: the veil starts 1px short of the
+       peek, or lower on short screens where the hero's minimum height wins. */
+    .tl-preview .tl_veil[hidden] { display: block; }
+    .tl_veil {
+      height: min(calc(var(--tl-peek) - 1px), calc(100vh - 360px));
+      height: min(calc(var(--tl-peek) - 1px), calc(100svh - 360px));
+    }
+    @media (max-width: 767px) {
+      .tl_veil { height: min(calc(var(--tl-peek) - 1px), calc(100svh - 300px)); }
+    }
+    .tl_veil > i {
+      position: absolute;
+      inset: 0;
+    }
+    /* Blurred content fades out above the pinned footer, which sits on a
+       solid band of page background (--tl-footer-band tall). */
+    .tl_veil { --tl-footer-band: 110px; }
+    .tl_veil_fade {
+      background: linear-gradient(to bottom, transparent 20%,
+        var(--tl-bg) calc(100% - var(--tl-footer-band)));
+    }
+    /* Copy of the footer pinned to the bottom of the screen on top of the
+       blur (js/pricing.js adds it); it fades out with the veil. */
+    .tl_veil .tl_page_footer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0 0 32px;
+      cursor: default;
+    }
+
+    @media (max-width: 480px) {
       .tl_hero_title { font-size: clamp(22px, 7vw, 30px); }
-      .tl_br_m { display: inline; }
-      /* reserve the note's width on the line so "Satu Harga" + note centre together */
-      .tl_hero_price { margin-right: 164px; }
-      .tl_hero_note {
-        left: 100%;
-        top: 50%;
-        bottom: auto;
-        width: auto;
-        margin: 0 0 0 2px;
-        display: flex;
-        align-items: center;
-        transform: translateY(-50%);
-      }
-      .tl_hero_note > span { font-size: 15px; padding-left: 2px; }
-      .tl_hero_note .tl_note_arrow_d { display: none; }
-      .tl_hero_note .tl_note_arrow_m { display: block; width: 22px; height: 16px; }
     }
   </style>
 </head>
@@ -215,23 +257,184 @@
         <div class="tl_main_wrap">
           <div class="tl_hero">
             <h1 class="tl_hero_title">
-              Satu <span class="tl_hero_brand">Aplikasi</span><br class="tl_br_m">
-              Satu <a href="/pricing" class="tl_hero_price"><span class="tl_hero_note" aria-hidden="true">
-                  <svg class="tl_note_arrow_m" viewBox="0 0 24 16"><path d="M22 4 C 15 2, 8 5, 3 9"/><path d="M8 4 L 3 9 L 9 12"/></svg>
-                  <span>Klik untuk pemakaian<br>gratis hingga 3 agen <span class="tl_note_caps">CRM</span></span>
-                  <svg class="tl_note_arrow_d" viewBox="0 0 64 40"><path d="M52 3 C 30 4, 14 12, 12 34"/><path d="M6 28 L 12 35 L 19 29"/></svg>
-                </span>Harga</a><br>
-              <span class="tl_hero_brand">Chat</span> <span class="tl_hero_chat">Platform</span>
+              <span class="tl_hero_accent">Chat</span> <span class="tl_hero_chat">Platform</span>
               <span class="tl_hero_tag"><span class="tl_hero_bracket">[</span><!-- Twemoji flag (CC-BY 4.0, github.com/jdecked/twemoji), red softened --><svg class="tl_hero_flag" viewBox="0 5 36 26" role="img" aria-label="Indonesia"><path fill="#f28b8b" d="M32 5H4C1.791 5 0 6.791 0 9v9h36V9c0-2.209-1.791-4-4-4z"/><path fill="#EEE" d="M36 27c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4v-9h36v9z"/></svg><span class="tl_hero_bracket">]</span></span>
             </h1>
           </div>
+
+          <div class="tl_veil" hidden aria-hidden="true"><i class="tl_veil_fade"></i></div>
+
+          <section class="tl_pricing_wrap" id="harga" aria-labelledby="tl_pricing_title">
+            <div class="tl_pricing_hero">
+              <h2 class="tl_pricing_title" id="tl_pricing_title">Pilih paket yang dirancang untuk bisnis.</h2>
+              <p class="tl_pricing_lead">Atau mulai secara gratis.</p>
+            </div>
+
+            <div class="tl_plans">
+              <div class="tl_plan">
+                <h3 class="tl_plan_name">Gratis<span class="tl_pricing_note"> hingga 3 agen <span class="tl_note_caps">CRM</span></span></h3>
+                <p class="tl_plan_desc">Untuk tim kecil yang baru mulai.</p>
+                <p class="tl_plan_price">Rp0 <span class="tl_plan_period">/ bulan</span></p>
+                <p class="tl_plan_note">Gratis selamanya</p>
+                <a href="https://web.telegraf.chat" target="_blank" rel="noopener" class="tl_plan_cta">Mulai gratis</a>
+                <p class="tl_plan_features_head">Yang Anda dapatkan:</p>
+                <ul class="tl_plan_features">
+                  <li>Obrolan tanpa batas</li>
+                  <li>Riwayat pesan tanpa batas</li>
+                  <li>Grup dan pesan langsung</li>
+                  <li>Aplikasi web dan Android</li>
+                </ul>
+              </div>
+
+              <div class="tl_plan tl_plan_featured">
+                <span class="tl_plan_badge">Semua fitur</span>
+                <h3 class="tl_plan_name">Premium</h3>
+                <p class="tl_plan_desc">Untuk tim yang melayani pelanggan setiap hari.</p>
+                <p class="tl_plan_price">Rp2.499.000 <span class="tl_plan_period">/ bulan</span></p>
+                <p class="tl_plan_note">Harga flat untuk seluruh tim</p>
+                <a href="https://wa.me/6281298219323?text=Halo%2C%20saya%20ingin%20berlangganan%20Telegraf%20Premium."
+                  target="_blank" rel="noopener" class="tl_plan_cta tl_plan_cta_primary">Berlangganan Premium</a>
+                <p class="tl_plan_features_head">Semua di Gratis, plus:</p>
+                <ul class="tl_plan_features">
+                  <li>Agen tanpa batas</li>
+                  <li>Kotak masuk omnichannel terpadu</li>
+                  <li>Distribusi percakapan otomatis ke agen</li>
+                  <li>Broadcast dan balasan otomatis</li>
+                  <li>Laporan dan analitik tim</li>
+                  <li>Dukungan prioritas</li>
+                  <li>Tanpa biaya tambahan atau add-on</li>
+                </ul>
+              </div>
+            </div>
+
+            <h2 class="tl_pricing_heading">Cukup satu langganan</h2>
+
+            <div class="tl_calc">
+              <div class="tl_calc_sizes" role="group" aria-label="Jumlah pengguna">
+                <span class="tl_calc_label">Jumlah pengguna</span>
+                <button type="button" data-users="5">5</button>
+                <button type="button" data-users="10" aria-pressed="true">10</button>
+                <button type="button" data-users="20">20</button>
+                <button type="button" data-users="50">50</button>
+              </div>
+
+              <div class="tl_calc_row">
+                <div class="tl_calc_head">
+                  <span class="tl_calc_name">Aplikasi chat tim + CRM omnichannel</span>
+                  <span class="tl_calc_total" id="tl_calc_combined"></span>
+                </div>
+                <div class="tl_calc_bar">
+                  <span class="tl_calc_seg tl_calc_seg_chat" id="tl_calc_bar_chat"></span><span
+                    class="tl_calc_seg tl_calc_seg_crm" id="tl_calc_bar_crm"></span>
+                </div>
+                <div class="tl_calc_legend">
+                  <span><i class="tl_calc_dot tl_calc_seg_chat"></i>Chat tim <span id="tl_calc_chat"></span></span>
+                  <span><i class="tl_calc_dot tl_calc_seg_crm"></i>CRM omnichannel <span id="tl_calc_crm"></span></span>
+                </div>
+              </div>
+
+              <div class="tl_calc_row">
+                <div class="tl_calc_head">
+                  <span class="tl_calc_name tl_calc_name_us">Telegraf Premium</span>
+                  <span class="tl_calc_total tl_calc_total_us" id="tl_calc_us"></span>
+                </div>
+                <div class="tl_calc_bar">
+                  <span class="tl_calc_seg tl_calc_seg_us" id="tl_calc_bar_us"></span>
+                </div>
+                <div class="tl_calc_legend"><span>Semua fitur, berapa pun jumlah penggunanya</span></div>
+              </div>
+
+              <p class="tl_calc_save">Hemat <strong id="tl_calc_save"></strong> per bulan</p>
+            </div>
+            <p class="tl_calc_fine">Estimasi per bulan berdasarkan harga publik aplikasi chat tim
+              populer (Rp161.442 per pengguna) dan CRM omnichannel populer (Rp400.000 per agen,
+              minimal 5 agen). Harga dicek pada 29 September 2026
+              dan dapat berubah.</p>
+
+            <h2 class="tl_pricing_heading">Bandingkan paket</h2>
+            <table class="tl_compare">
+              <thead>
+                <tr>
+                  <th scope="col"><span class="tl_sr">Fitur</span></th>
+                  <th scope="col">Gratis</th>
+                  <th scope="col">Premium</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="rowgroup" colspan="3">Obrolan tim</th></tr>
+                <tr><td>Pesan dan obrolan</td><td>Tanpa batas</td><td>Tanpa batas</td></tr>
+                <tr><td>Riwayat pesan</td><td>Tanpa batas</td><td>Tanpa batas</td></tr>
+                <tr><td>Grup dan pesan langsung</td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td></tr>
+                <tr><td>Berbagi berkas</td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td></tr>
+                <tr><td>Aplikasi web dan Android</td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td></tr>
+              </tbody>
+              <tbody>
+                <tr><th scope="rowgroup" colspan="3">Layanan pelanggan</th></tr>
+                <tr><td>Jumlah agen</td><td>Hingga 3</td><td>Tanpa batas</td></tr>
+                <tr><td>Kotak masuk omnichannel terpadu</td><td><span class="tl_no"></span><span class="tl_sr">Tidak</span></td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td></tr>
+                <tr><td>Distribusi percakapan otomatis</td><td><span class="tl_no"></span><span class="tl_sr">Tidak</span></td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td></tr>
+                <tr><td>Broadcast pesan</td><td><span class="tl_no"></span><span class="tl_sr">Tidak</span></td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td></tr>
+                <tr><td>Balasan otomatis dan chatbot</td><td><span class="tl_no"></span><span class="tl_sr">Tidak</span></td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td></tr>
+              </tbody>
+              <tbody>
+                <tr><th scope="rowgroup" colspan="3">Administrasi dan laporan</th></tr>
+                <tr><td>Peran dan hak akses admin</td><td><span class="tl_no"></span><span class="tl_sr">Tidak</span></td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td></tr>
+                <tr><td>Laporan dan analitik tim</td><td><span class="tl_no"></span><span class="tl_sr">Tidak</span></td><td><span class="tl_yes"></span><span class="tl_sr">Ya</span></td></tr>
+              </tbody>
+              <tbody>
+                <tr><th scope="rowgroup" colspan="3">Dukungan dan penagihan</th></tr>
+                <tr><td>Dukungan</td><td>Standar</td><td>Prioritas</td></tr>
+                <tr><td>Biaya per agen</td><td>Rp0</td><td>Rp0</td></tr>
+                <tr><td>Add-on berbayar</td><td>Tidak ada</td><td>Tidak ada</td></tr>
+              </tbody>
+            </table>
+
+            <h2 class="tl_pricing_heading">Pertanyaan yang sering diajukan</h2>
+            <div class="tl_faq">
+              <details>
+                <summary>Apakah harga Premium dihitung per agen?</summary>
+                <p>Tidak. Rp2.499.000 per bulan adalah harga flat untuk seluruh tim Anda.
+                  Semua fitur langsung terbuka dan tidak ada add-on yang perlu dibeli
+                  terpisah.</p>
+              </details>
+              <details>
+                <summary>Apa yang terjadi jika tim saya lebih dari 3 agen di paket Gratis?</summary>
+                <p>Paket Gratis mendukung hingga 3 agen. Untuk menambah agen, tingkatkan ke
+                  paket Premium. Obrolan dan riwayat pesan Anda tetap tersimpan.</p>
+              </details>
+              <details>
+                <summary>Metode pembayaran apa saja yang tersedia?</summary>
+                <p>Transfer bank (virtual account), kartu kredit/debit, dompet digital
+                  (e-wallet), QR payment, atau invoice untuk pelanggan korporasi.</p>
+              </details>
+              <details>
+                <summary>Apakah harga sudah termasuk pajak?</summary>
+                <p>Harga yang tercantum sudah termasuk atau akan ditambahkan pajak sesuai
+                  peraturan perpajakan yang berlaku di Indonesia.</p>
+              </details>
+              <details>
+                <summary>Bisakah saya berhenti berlangganan kapan saja?</summary>
+                <p>Bisa. Anda dapat menghentikan Langganan kapan saja, dan penghentian di tengah
+                  periode dapat disertai pengembalian dana sesuai
+                  <a href="/terms#langganan-refund">Ketentuan Penggunaan</a>.</p>
+              </details>
+            </div>
+
+            <div class="tl_pricing_bottom">
+              <h2>Punya pertanyaan lain?</h2>
+              <p>Tim kami siap membantu memilih paket yang tepat.</p>
+              <a href="https://wa.me/6281298219323" target="_blank" rel="noopener" class="tl_plan_cta">Hubungi kami</a>
+            </div>
+
+          </section>
         </div>
 
       </div>
     </div>
 
     <div class="tl_page_footer">
-      <a href="/privacy" class="tl_page_footer_link">Kebijakan Privasi</a>
+      <a href="#harga" class="tl_page_footer_link">Harga</a>
+      &middot; <a href="/privacy" class="tl_page_footer_link">Kebijakan Privasi</a>
       &middot; <a href="/terms" class="tl_page_footer_link">Ketentuan Penggunaan</a>
       <div class="tl_page_footer_org"><a href="/"
           class="tl_page_footer_link">PT. Chat Platform Indonesia</a>
@@ -245,7 +448,9 @@
       document.getElementById('tl_footer_year').textContent = new Date().getFullYear();
     })();
   </script>
+  <script src="/js/pricing.js"></script>
   <script src="/js/theme-toggle.js"></script>
+  <script src="/js/back-to-top.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
-/* Top bar and footer state shared by the secondary pages (/pricing, /privacy,
-   /terms). The homepage has neither: it keeps its single call to action. */
+/* Top bar and footer state shared by the secondary pages (/privacy, /terms).
+   The homepage loads this file only for the back-to-top strip. */
 
 /* Wordmark face: Roboto Medium (Apache 2.0), subset to the letters of
    "Telegraf" and inlined so it is there on first paint. Set dark grey and
