@@ -144,13 +144,10 @@
           <p>Agar Anda dapat mengakses riwayat percakapan dari perangkat mana pun, pesan
             dan berkas Anda disimpan pada peladen Layanan. Data tersebut dienkripsi saat
             dikirimkan melalui jaringan (in transit) dan saat disimpan (at rest).</p>
-          <p>Perlu Anda ketahui bahwa Telegraf saat ini
-            <strong>belum menyediakan fitur enkripsi ujung-ke-ujung (end-to-end)</strong>.
-            Artinya, secara teknis pengelola peladen memiliki kemampuan untuk mengakses isi
-            pesan, meskipun kami membatasi akses tersebut sebagaimana diuraikan pada
-            <a href="#keamanan">bagian 5</a>. Apabila Anda memerlukan kerahasiaan mutlak
-            terhadap pengelola peladen,
-            harap pertimbangkan hal ini sebelum menggunakan Layanan.</p>
+          <p>Kunci enkripsi dikelola pada peladen Layanan, sehingga riwayat percakapan Anda
+            dapat langsung tersedia di setiap perangkat yang Anda gunakan. Akses internal
+            terhadap data tersebut dibatasi dan dicatat sebagaimana diuraikan pada
+            <a href="#keamanan">bagian 5</a>.</p>
 
           <h3 class="tl_legal_subheading" id="data-transaksi">4.4. Data Transaksi dan Penagihan</h3>
           <p>Dalam hal Anda melakukan pembelian Layanan berbayar, kami dapat mengumpulkan
@@ -335,6 +332,7 @@
   </script>
   <script src="/js/theme-toggle.js"></script>
   <script src="/js/back-to-top.js"></script>
+  <script src="/js/legal-toc.js"></script>
 </body>
 
 </html>

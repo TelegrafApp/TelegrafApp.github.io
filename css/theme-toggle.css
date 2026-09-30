@@ -12,7 +12,7 @@ html.tl-dark {
 }
 
 .tl-theme-toggle {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 24px;
   z-index: 10000;

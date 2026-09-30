@@ -39,7 +39,7 @@
     var clone = document.querySelector('.tl_page_wrap').cloneNode(true);
     clone.id = 'tl-reveal-clone';
     var cb = clone.querySelector('#theme-toggle');
-    if (cb) cb.parentNode.removeChild(cb); // don't double up the fixed button
+    if (cb) cb.parentNode.removeChild(cb); // don't double up the toggle button
     clone.classList.add('tl-skin-light');
     // The overlay is fixed to the viewport; shift the copy so it lines up
     // with the part of the page currently scrolled into view.

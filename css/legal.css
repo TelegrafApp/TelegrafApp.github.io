@@ -127,3 +127,75 @@ body {
   color: var(--tl-accent);
   text-decoration: none;
 }
+
+/* "On this page" rail (js/legal-toc.js): a thin line down the left with the
+   current section drawn over it in the accent colour. The open section's
+   sub-sections sit on a line that steps in and back out again. */
+.tl_legal_heading,
+.tl_legal_subheading { scroll-margin-top: 24px; }
+
+.tl_toc {
+  position: fixed;
+  right: 24px;
+  z-index: 4;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.tl_toc::-webkit-scrollbar { display: none; }
+.tl_toc.tl_toc_no_room { display: none; }
+
+.tl_toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tl_toc a {
+  display: block;
+  padding: 4px 0 4px 12px;
+  color: var(--tl-muted);
+  font-size: 13px;
+  line-height: 19px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  box-shadow: inset 1px 0 var(--tl-rule);
+  transition: color .15s ease;
+}
+.tl_toc a:hover,
+.tl_toc a:focus { color: var(--tl-fg); text-decoration: none; }
+.tl_toc a.tl_toc_active {
+  color: var(--tl-accent);
+  box-shadow: inset 2px 0 var(--tl-accent);
+}
+
+.tl_toc_sub {
+  display: none;
+  position: relative;
+  padding: 8px 0 !important;
+}
+.tl_toc_open > .tl_toc_sub { display: block; }
+.tl_toc_sub a {
+  margin-left: 12px;
+  padding-left: 14px;
+}
+/* The two diagonal steps: 12px across, 8px down (and back up). */
+.tl_toc_sub:before,
+.tl_toc_sub:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 14.4px;
+  height: 1px;
+  background: var(--tl-rule);
+}
+.tl_toc_sub:before {
+  top: 0;
+  transform-origin: 0 0;
+  transform: rotate(33.7deg);
+}
+.tl_toc_sub:after {
+  bottom: 0;
+  transform-origin: 0 100%;
+  transform: rotate(-33.7deg);
+}
