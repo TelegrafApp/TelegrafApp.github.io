@@ -13,7 +13,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <script>
     // Apply the saved (or system) theme before first paint, so dark mode
-    // doesn't flash light or fade the hero pill in. theme-toggle.js does the rest.
+    // doesn't flash light. theme-toggle.js wires up the button.
     (function () {
       var t = null;
       try { t = localStorage.getItem('tl-theme'); } catch (e) {}
@@ -25,7 +25,6 @@
       root.classList.add('tl-js', 'tl-preview');
     })();
   </script>
-  <link href="/css/bootstrap.min.css" rel="stylesheet">
 
   <link href="/css/telegraf.css" rel="stylesheet" media="screen">
   <link href="/css/pricing.css" rel="stylesheet" media="screen">
@@ -97,7 +96,7 @@
       html { scroll-behavior: smooth; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .tl_frame, .tl_frame > span, .tl_tiles > i, .tl_veil,
+      .tl_frame, .tl_veil, .tl_reel > b,
       #harga .tl_pricing_title, #harga .tl_pricing_lead, #harga .tl_plans {
         transition: none !important;
       }
@@ -107,11 +106,11 @@
       .tl_hero { min-height: max(300px, calc(100svh - var(--tl-peek))); }
     }
     /* Hero frame: a box filled with the logo's gradient, reading "Chat" and
-       a business word that keeps changing (js/hero-words.js). The logo art
+       a business word that keeps sliding past (js/hero-words.js). The logo art
        is a circle; at 142% (just over the square's diagonal) the box sits
        wholly inside it, so only the gradient shows. */
     .tl_frame {
-      --tl-frame: min(180px, 42vw, calc((100svh - var(--tl-peek) - 104px) / 1.1));
+      --tl-frame: min(180px, 42vw, max(120px, calc((100svh - var(--tl-peek) - 104px) / 1.1)));
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -134,58 +133,52 @@
       align-self: flex-end;
       white-space: nowrap;
     }
+    /* With JS, the word becomes a line of every word sliding through the
+       square (js/hero-words.js): the current one inside in black, the rest
+       grey either side, fading out toward the hero's edges. */
+    .tl_reeled .tl_frame_word { visibility: hidden; }
+    .tl_frame > .tl_reel {
+      position: absolute;
+      /* clipped to the hero's width, or the words off to the sides would
+         widen the page (phones then zoom the whole page out); 0.3em of extra
+         height below keeps descenders */
+      bottom: calc(var(--tl-frame) * 0.09 - 0.3em);
+      height: 1.3em;
+      overflow: hidden;
+      pointer-events: none;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+    }
+    .tl_reel > b {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: var(--tl-muted);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .tl_reel > b.tl_on {
+      color: #000000;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .tl_reel.tl_ready > b {
+      transition: transform .6s cubic-bezier(.65, 0, .35, 1), opacity .6s ease, color .2s ease;
+    }
     /* Leaving the top of the page (html.tl-preview removed, js/pricing.js)
-       dissolves the square: the text fades, then its blocks (made by
-       js/hero-dissolve.js, each showing its own piece of the gradient) fade
-       out one by one in place; coming back plays it in reverse. Timed CSS
-       transitions, not scroll-scrubbed, so fast scrolling stays smooth. */
+       fades the square out, words and all; coming back fades it in. A timed
+       CSS transition, not scroll-scrubbed, so fast scrolling stays smooth. */
     .tl_frame {
       position: relative;
       z-index: 2;
-      /* the glow returns only once every block is back, else it outlines an
-         empty box */
-      transition: box-shadow .25s ease calc(var(--tl-blocks-back, 0ms));
+      transition: opacity .3s ease;
     }
     .tl_frame > span {
       position: relative;
       z-index: 1;
-      transition: opacity .16s ease .3s; /* text returns after the blocks */
     }
-    .tl_frame.tl_tiled { background: transparent; }
-    .tl_tiles {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      border-radius: inherit; /* keep the box's corners */
-      pointer-events: none;
-    }
-    .tl_tiles > i {
-      position: absolute;
-      /* 1px overlap so no hairline seams show between blocks */
-      width: calc(var(--tl-frame) / var(--n) + 1px);
-      height: calc(var(--tl-frame) / var(--n) + 1px);
-      left: calc(var(--tl-frame) / var(--n) * var(--x));
-      top: calc(var(--tl-frame) / var(--n) * var(--y));
-      background: #2a9df4 url(/img/t_logo.png) no-repeat;
-      background-size: calc(var(--tl-frame) * 1.42);
-      background-position:
-        calc(var(--tl-frame) * -0.21 - var(--tl-frame) / var(--n) * var(--x))
-        calc(var(--tl-frame) * -0.21 - var(--tl-frame) / var(--n) * var(--y));
-      /* coming back: last out, first in */
-      transition: opacity .24s ease calc((var(--last) - var(--r)) * 70ms);
-    }
-    .tl-js:not(.tl-preview) .tl_frame {
-      box-shadow: none;
-      transition: none; /* gone at once when the blocks start to go */
-    }
-    .tl-js:not(.tl-preview) .tl_frame > span {
-      opacity: 0;
-      transition-delay: 0s;
-    }
-    .tl-js:not(.tl-preview) .tl_tiles > i {
-      opacity: 0;
-      transition-delay: calc(90ms + var(--r) * 70ms);
-    }
+    .tl-js:not(.tl-preview) .tl_frame { opacity: 0; }
     .tl_sr_only {
       position: absolute;
       width: 1px;
@@ -502,7 +495,6 @@
     })();
   </script>
   <script src="/js/hero-words.js"></script>
-  <script src="/js/hero-dissolve.js"></script>
   <script src="/js/pricing.js"></script>
   <script src="/js/theme-toggle.js"></script>
   <script src="/js/back-to-top.js"></script>

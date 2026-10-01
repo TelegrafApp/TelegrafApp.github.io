@@ -54,7 +54,7 @@
 // Top-of-page state on the homepage: html.tl-preview is on while the page
 // sits at the top (pricing blurred under a veil that fades the bottom of the
 // screen into the background, the hero square whole) and off once scrolled
-// away (blur lifts, square dissolves). CSS transitions animate both ways, so
+// away (blur lifts, square fades out). CSS transitions animate both ways, so
 // fast scrolling stays smooth. A copy of the footer sits on the veil at the
 // bottom of the screen. Clicking the blurred area scrolls to the plans.
 // Without JS there is no blur and no veil.
