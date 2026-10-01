@@ -1,6 +1,3 @@
-/* Shared styles for the standalone legal pages (/privacy, /terms). */
-
-/* .tl-skin-light re-skins the cloned page during the theme reveal. */
 :root,
 .tl-skin-light {
   --tl-bg: #ffffff;
@@ -28,7 +25,6 @@ body {
 .tl_page_footer_org { color: var(--tl-muted); }
 .tl_page_footer_link:hover { color: var(--tl-accent); }
 
-/* Single narrow centred column, generous vertical rhythm. */
 .tl_legal_wrap {
   max-width: 640px;
   margin: 0 auto;
@@ -83,10 +79,8 @@ body {
   .tl_legal_heading { font-size: 18px; margin-top: 36px; }
 }
 
-/* Intro paragraph sits directly under the "last updated" line. */
 .tl_legal_wrap > p:first-of-type + p { margin-top: 26px; }
 
-/* Numbered table of contents linking to each section. */
 .tl_legal_toc {
   margin: 26px 0 0;
   padding-left: 22px;
@@ -109,7 +103,6 @@ body {
 
 .tl_legal_wrap strong { font-weight: 600; }
 
-/* Sub-section headings (1.1, 3.2, ...) — lighter than a section heading. */
 .tl_legal_subheading {
   color: var(--tl-fg);
   font-size: 16px;
@@ -121,16 +114,12 @@ body {
   .tl_legal_subheading { font-size: 15px; margin-top: 26px; }
 }
 
-/* Company name in the footer links home; give it a hover cue. */
 .tl_page_footer_org a.tl_page_footer_link { color: inherit; }
 .tl_page_footer_org a.tl_page_footer_link:hover {
   color: var(--tl-accent);
   text-decoration: none;
 }
 
-/* "On this page" rail (js/legal-toc.js): a thin line down the left with the
-   current section drawn over it in the accent colour. The open section's
-   sub-sections sit on a line that steps in and back out again. */
 .tl_legal_heading,
 .tl_legal_subheading { scroll-margin-top: 24px; }
 
@@ -179,7 +168,6 @@ body {
   margin-left: 12px;
   padding-left: 14px;
 }
-/* The two diagonal steps: 12px across, 8px down (and back up). */
 .tl_toc_sub:before,
 .tl_toc_sub:after {
   content: "";

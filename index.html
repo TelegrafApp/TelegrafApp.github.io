@@ -12,16 +12,12 @@
 
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <script>
-    // Apply the saved (or system) theme before first paint, so dark mode
-    // doesn't flash light. theme-toggle.js wires up the button.
     (function () {
       var t = null;
       try { t = localStorage.getItem('tl-theme'); } catch (e) {}
       var root = document.documentElement;
       if (t ? t === 'dark' : (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches))
         root.classList.add('tl-dark');
-      // Start in the top-of-page state (pricing blurred, square whole) on first
-      // paint; js/pricing.js takes over from here.
       root.classList.add('tl-js', 'tl-preview');
     })();
   </script>
@@ -31,9 +27,6 @@
   <link href="/css/theme-toggle.css" rel="stylesheet" media="screen">
   <link href="/css/subpage.css" rel="stylesheet" media="screen">
   <style>
-    /* Caveat 700, subset to the glyphs of "Gratis hingga 3 agen CRM" and
-       inlined so the face is available on first paint - no network request,
-       no swap flash. */
     @font-face {
       font-family: 'Caveat';
       font-style: normal;
@@ -53,7 +46,6 @@
       --tl-muted: #87919e;
       --tl-accent: #3aa3e8;
     }
-    /* self-contained light skin, used to re-skin the cloned layer during the reveal */
     .tl-skin-light {
       --tl-bg: #ffffff; --tl-fg: #333333; --tl-muted: #8c8c8c; --tl-accent: #179cde;
     }
@@ -76,9 +68,6 @@
       margin-top: 0;
       padding: 0 16px;
     }
-    /* The hero takes the first screen minus --tl-peek, so the top of the
-       pricing section (title and the tops of the plan cards) shows below it
-       as a preview under a blur veil; the veil lifts on scroll. */
     :root { --tl-peek: 480px; }
     .tl_hero {
       display: flex;
@@ -105,10 +94,6 @@
       :root { --tl-peek: 450px; }
       .tl_hero { min-height: max(300px, calc(100svh - var(--tl-peek))); }
     }
-    /* Hero frame: a box filled with the logo's gradient, reading "Chat" and
-       a business word that keeps sliding past (js/hero-words.js). The logo art
-       is a circle; at 142% (just over the square's diagonal) the box sits
-       wholly inside it, so only the gradient shows. */
     .tl_frame {
       --tl-frame: min(180px, 42vw, max(120px, calc((100svh - var(--tl-peek) - 104px) / 1.1)));
       display: flex;
@@ -133,15 +118,9 @@
       align-self: flex-end;
       white-space: nowrap;
     }
-    /* With JS, the word becomes a line of every word sliding through the
-       square (js/hero-words.js): the current one inside in black, the rest
-       grey either side, fading out toward the hero's edges. */
     .tl_reeled .tl_frame_word { visibility: hidden; }
     .tl_frame > .tl_reel {
       position: absolute;
-      /* clipped to the hero's width, or the words off to the sides would
-         widen the page (phones then zoom the whole page out); 0.3em of extra
-         height below keeps descenders */
       bottom: calc(var(--tl-frame) * 0.09 - 0.3em);
       height: 1.3em;
       overflow: hidden;
@@ -166,9 +145,6 @@
     .tl_reel.tl_ready > b {
       transition: transform .6s cubic-bezier(.65, 0, .35, 1), opacity .6s ease, color .2s ease;
     }
-    /* Leaving the top of the page (html.tl-preview removed, js/pricing.js)
-       fades the square out, words and all; coming back fades it in. A timed
-       CSS transition, not scroll-scrubbed, so fast scrolling stays smooth. */
     .tl_frame {
       position: relative;
       z-index: 2;
@@ -178,7 +154,9 @@
       position: relative;
       z-index: 1;
     }
-    .tl-js:not(.tl-preview) .tl_frame { opacity: 0; }
+    .tl-js:not(.tl-preview) .tl_frame { opacity: 0; pointer-events: none; }
+    .tl-preview .tl_frame { cursor: pointer; }
+    .tl-preview .tl_reel > b { pointer-events: auto; }
     .tl_sr_only {
       position: absolute;
       width: 1px;
@@ -188,13 +166,11 @@
       white-space: nowrap;
     }
 
-    /* "hingga 3 agen CRM", handwritten and slightly tilted like a note,
-       beside the "Gratis" plan name. */
     .tl_pricing_note {
       display: inline-block;
       margin-left: 8px;
       vertical-align: baseline;
-      transform-origin: 0 80%; /* tilt from its start, on the heading's baseline */
+      transform-origin: 0 80%;
       color: var(--tl-fg);
       font-family: "Caveat", cursive;
       font-size: 20px;
@@ -202,17 +178,11 @@
       line-height: 1.05;
       transform: rotate(-4deg);
     }
-    /* handwritten capitals run tall - bring "CRM" down to lowercase height */
     .tl_pricing_note .tl_note_caps { font-size: 0.78em; }
     @media (max-width: 480px) {
       .tl_pricing_note { font-size: 18px; }
     }
 
-    /* Pricing preview. While html.tl-preview is set (top of the page) the
-       pricing section is blurred, stepped from the title (barely soft) to
-       the plan cards (out of focus). It is a plain filter on the elements
-       themselves, so the theme switch's circular reveal stays smooth, and
-       it lifts with a CSS transition the GPU runs, not per scroll event. */
     #harga .tl_pricing_title,
     #harga .tl_pricing_lead,
     #harga .tl_plans {
@@ -222,9 +192,6 @@
     .tl-preview #harga .tl_pricing_lead { filter: blur(1.5px); }
     .tl-preview #harga .tl_plans { filter: blur(7px); }
 
-    /* The veil over the preview: fades the bottom of the screen into the
-       page background, holds the pinned footer copy and takes clicks.
-       js/pricing.js sets its top edge (just above the "Intip paket" title). */
     .tl_veil {
       position: fixed;
       left: 0;
@@ -241,8 +208,6 @@
       visibility: visible;
       transition: opacity .3s ease;
     }
-    /* Until js/pricing.js measures it: the veil starts 1px short of the
-       peek, or lower on short screens where the hero's minimum height wins. */
     .tl_veil {
       height: min(calc(var(--tl-peek) - 1px), calc(100vh - 360px));
       height: min(calc(var(--tl-peek) - 1px), calc(100svh - 360px));
@@ -254,15 +219,11 @@
       position: absolute;
       inset: 0;
     }
-    /* Blurred content fades out above the pinned footer, which sits on a
-       solid band of page background (--tl-footer-band tall). */
     .tl_veil { --tl-footer-band: 110px; }
     .tl_veil_fade {
       background: linear-gradient(to bottom, transparent 20%,
         var(--tl-bg) calc(100% - var(--tl-footer-band)));
     }
-    /* Copy of the footer pinned to the bottom of the screen on top of the
-       blur (js/pricing.js adds it); it fades out with the veil. */
     .tl_veil .tl_page_footer {
       position: absolute;
       left: 0;

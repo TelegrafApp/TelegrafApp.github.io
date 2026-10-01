@@ -1,6 +1,3 @@
-// Day/night theme: wires up the #theme-toggle button with a circular reveal
-// centred on the button. Each page's <head> applies the saved (or system)
-// theme before first paint.
 (function () {
   var root = document.documentElement;
   var btn = document.getElementById('theme-toggle');
@@ -29,22 +26,17 @@
     var cFull = 'circle(' + Math.round(Math.sqrt(mx * mx + my * my)) + at;
     var cZero = 'circle(0' + at;
 
-    // A light copy of the page in a viewport-fixed overlay, clipped to a
-    // circle that grows from or shrinks into the button.
     var ov = document.createElement('div');
     ov.className = 'tl-reveal';
     ov.style.background = '#ffffff';
     var clone = document.querySelector('.tl_page_wrap').cloneNode(true);
     clone.id = 'tl-reveal-clone';
     clone.classList.add('tl-skin-light');
-    // Shift the copy so it lines up with the part of the page in view.
     clone.style.position = 'relative';
     clone.style.top = -window.pageYOffset + 'px';
     clone.style.left = -window.pageXOffset + 'px';
     ov.appendChild(clone);
 
-    // Day -> night: the light closes into the button over the dark page.
-    // Night -> day: the light opens from the button over the dark page.
     clip(ov, nextDark ? cFull : cZero);
     document.body.appendChild(ov);
     if (nextDark) { root.classList.add('tl-dark'); save(true); }

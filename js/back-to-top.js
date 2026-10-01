@@ -1,9 +1,7 @@
-// telegram.org-style "go up" strip down the left edge; shown once the page is
-// scrolled, clicking it glides back to the top. Styles live in subpage.css.
 (function () {
   var SHOW_AFTER = 400;
-  var MIN_WIDTH = 96;  // narrowest strip that still fits the label
-  var GAP = 24;        // space kept between the strip and the page content
+  var MIN_WIDTH = 96;
+  var GAP = 24;
 
   var content = document.querySelector('.tl_legal_wrap, .tl_pricing_wrap');
 
@@ -32,9 +30,6 @@
     wrap.blur();
   });
 
-  // The hit area covers the empty margin left of the content, so the pointer
-  // doesn't have to reach the window edge; the visible strip stays narrow.
-  // Too little margin: no strip.
   function onResize() {
     var room = content ? content.getBoundingClientRect().left - GAP : MIN_WIDTH;
     wrap.classList.toggle('back_to_top_no_room', room < MIN_WIDTH);

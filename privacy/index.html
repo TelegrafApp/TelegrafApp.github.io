@@ -12,8 +12,6 @@
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   <script>
-    // Apply the saved (or system) theme before first paint, so dark mode
-    // doesn't flash light. theme-toggle.js wires up the button.
     (function () {
       var t = null;
       try { t = localStorage.getItem('tl-theme'); } catch (e) {}

@@ -1,4 +1,3 @@
-// Cost comparison: chat app per user + CRM per agent vs Telegraf flat.
 (function () {
   var CHAT_PER_USER = 161442;
   var CRM_PER_AGENT = 400000;
@@ -18,8 +17,6 @@
     return { chat: chat, crm: crm, total: chat + crm };
   }
 
-  // One fixed scale for every team size, so the bars grow with the team
-  // while the flat Telegraf price stays put.
   var scale = US;
   for (var i = 0; i < buttons.length; i++) {
     scale = Math.max(scale, cost(+buttons[i].getAttribute('data-users')).total);
@@ -51,24 +48,14 @@
   render(10);
 })();
 
-// Top-of-page state on the homepage: html.tl-preview is on while the page
-// sits at the top (pricing blurred under a veil that fades the bottom of the
-// screen into the background, the hero square whole) and off once scrolled
-// away (blur lifts, square fades out). CSS transitions animate both ways, so
-// fast scrolling stays smooth. A copy of the footer sits on the veil at the
-// bottom of the screen. Clicking the blurred area scrolls to the plans.
-// Without JS there is no blur and no veil.
 (function () {
   var veil = document.querySelector('.tl_veil');
   var start = document.querySelector('.tl_pricing_title');
   if (!veil || !start) return;
 
-  // Leave the top state past LEAVE px, come back under ENTER px; the gap
-  // keeps it from flickering at the edge.
   var LEAVE = 24;
   var ENTER = 8;
 
-  // Mouse-only copy: keyboard and screen reader users get the real footer.
   var footer = document.querySelector('.tl_page_footer');
   if (footer) {
     var copy = footer.cloneNode(true);
@@ -80,7 +67,6 @@
   }
 
   function place() {
-    // Title's top edge in page coordinates, as seen from the top of the page.
     var top = start.getBoundingClientRect().top + window.pageYOffset - 16;
     var h = window.innerHeight - top;
     veil.style.height = Math.max(h, 0) + 'px';
@@ -98,7 +84,7 @@
   }
 
   veil.addEventListener('click', function (e) {
-    if (e.target.closest('.tl_page_footer')) return; // footer links work as usual
+    if (e.target.closest('.tl_page_footer')) return;
     document.getElementById('harga').scrollIntoView({ behavior: 'smooth' });
   });
 
