@@ -51,24 +51,27 @@
   render(10);
 })();
 
-// Pricing preview on the homepage: the pricing section below the hero starts
-// out blurred (html.tl-preview + --tl-blur, see index.html) under a veil that
-// fades the bottom of the screen into the background, and both lift over the
-// first stretch of scrolling. A copy of the footer sits on the veil at the
-// bottom of the screen and fades with it. Clicking the blurred area scrolls
-// to the plans. Without JS there is no blur and no veil.
+// Top-of-page state on the homepage: html.tl-preview is on while the page
+// sits at the top (pricing blurred under a veil that fades the bottom of the
+// screen into the background, the hero square whole) and off once scrolled
+// away (blur lifts, square dissolves). CSS transitions animate both ways, so
+// fast scrolling stays smooth. A copy of the footer sits on the veil at the
+// bottom of the screen. Clicking the blurred area scrolls to the plans.
+// Without JS there is no blur and no veil.
 (function () {
   var veil = document.querySelector('.tl_veil');
   var start = document.querySelector('.tl_pricing_title');
   if (!veil || !start) return;
 
-  var FADE = 220; // px of scrolling over which the veil fades out
+  // Leave the top state past LEAVE px, come back under ENTER px; the gap
+  // keeps it from flickering at the edge.
+  var LEAVE = 24;
+  var ENTER = 8;
 
   // Mouse-only copy: keyboard and screen reader users get the real footer.
   var footer = document.querySelector('.tl_page_footer');
-  var copy = null;
   if (footer) {
-    copy = footer.cloneNode(true);
+    var copy = footer.cloneNode(true);
     var ids = copy.querySelectorAll('[id]');
     for (var i = 0; i < ids.length; i++) ids[i].removeAttribute('id');
     var links = copy.querySelectorAll('a');
@@ -85,17 +88,13 @@
   }
 
   var root = document.documentElement;
+  var atTop = true;
 
   function update() {
     var y = window.pageYOffset;
-    var o = Math.max(1 - y / FADE, 0);
-    root.classList.toggle('tl-preview', o > 0);
-    root.style.setProperty('--tl-blur', o.toFixed(3));
-    veil.hidden = o <= 0 || veil.style.height === '0px';
-    veil.style.opacity = o;
-    // The footer goes twice as fast, so it's gone before the cards sharpen
-    // underneath it.
-    if (copy) copy.style.opacity = Math.max(1 - 2 * y / FADE, 0);
+    if (atTop && y > LEAVE) atTop = false;
+    else if (!atTop && y < ENTER) atTop = true;
+    root.classList.toggle('tl-preview', atTop);
   }
 
   veil.addEventListener('click', function (e) {

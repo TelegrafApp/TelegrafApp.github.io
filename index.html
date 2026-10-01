@@ -20,10 +20,9 @@
       var root = document.documentElement;
       if (t ? t === 'dark' : (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches))
         root.classList.add('tl-dark');
-      // Start the pricing preview blurred on first paint; js/pricing.js takes
-      // over from here (and lifts it if the page opens scrolled down).
-      root.classList.add('tl-preview');
-      root.style.setProperty('--tl-blur', '1');
+      // Start in the top-of-page state (pricing blurred, square whole) on first
+      // paint; js/pricing.js takes over from here.
+      root.classList.add('tl-js', 'tl-preview');
     })();
   </script>
   <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -97,6 +96,12 @@
     @media (prefers-reduced-motion: no-preference) {
       html { scroll-behavior: smooth; }
     }
+    @media (prefers-reduced-motion: reduce) {
+      .tl_frame, .tl_frame > span, .tl_tiles > i, .tl_veil,
+      #harga .tl_pricing_title, #harga .tl_pricing_lead, #harga .tl_plans {
+        transition: none !important;
+      }
+    }
     @media (max-width: 767px) {
       :root { --tl-peek: 450px; }
       .tl_hero { min-height: max(300px, calc(100svh - var(--tl-peek))); }
@@ -129,6 +134,58 @@
       align-self: flex-end;
       white-space: nowrap;
     }
+    /* Leaving the top of the page (html.tl-preview removed, js/pricing.js)
+       dissolves the square: the text fades, then its blocks (made by
+       js/hero-dissolve.js, each showing its own piece of the gradient) fade
+       out one by one in place; coming back plays it in reverse. Timed CSS
+       transitions, not scroll-scrubbed, so fast scrolling stays smooth. */
+    .tl_frame {
+      position: relative;
+      z-index: 2;
+      /* the glow returns only once every block is back, else it outlines an
+         empty box */
+      transition: box-shadow .25s ease calc(var(--tl-blocks-back, 0ms));
+    }
+    .tl_frame > span {
+      position: relative;
+      z-index: 1;
+      transition: opacity .16s ease .3s; /* text returns after the blocks */
+    }
+    .tl_frame.tl_tiled { background: transparent; }
+    .tl_tiles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: inherit; /* keep the box's corners */
+      pointer-events: none;
+    }
+    .tl_tiles > i {
+      position: absolute;
+      /* 1px overlap so no hairline seams show between blocks */
+      width: calc(var(--tl-frame) / var(--n) + 1px);
+      height: calc(var(--tl-frame) / var(--n) + 1px);
+      left: calc(var(--tl-frame) / var(--n) * var(--x));
+      top: calc(var(--tl-frame) / var(--n) * var(--y));
+      background: #2a9df4 url(/img/t_logo.png) no-repeat;
+      background-size: calc(var(--tl-frame) * 1.42);
+      background-position:
+        calc(var(--tl-frame) * -0.21 - var(--tl-frame) / var(--n) * var(--x))
+        calc(var(--tl-frame) * -0.21 - var(--tl-frame) / var(--n) * var(--y));
+      /* coming back: last out, first in */
+      transition: opacity .24s ease calc((var(--last) - var(--r)) * 70ms);
+    }
+    .tl-js:not(.tl-preview) .tl_frame {
+      box-shadow: none;
+      transition: none; /* gone at once when the blocks start to go */
+    }
+    .tl-js:not(.tl-preview) .tl_frame > span {
+      opacity: 0;
+      transition-delay: 0s;
+    }
+    .tl-js:not(.tl-preview) .tl_tiles > i {
+      opacity: 0;
+      transition-delay: calc(90ms + var(--r) * 70ms);
+    }
     .tl_sr_only {
       position: absolute;
       width: 1px;
@@ -158,15 +215,19 @@
       .tl_pricing_note { font-size: 18px; }
     }
 
-    /* Pricing preview. While html.tl-preview is set (top of the page),
-       js/pricing.js scales --tl-blur from 1 down to 0 over the first scroll.
-       The blur is a plain filter on the elements themselves, stepped from
-       the title (barely soft) to the plan cards (out of focus); unlike a
-       backdrop-filter veil it is drawn once and reused, so the theme
-       switch's circular reveal stays smooth over it. */
-    .tl-preview #harga .tl_pricing_title { filter: blur(calc(var(--tl-blur) * 1.2px)); }
-    .tl-preview #harga .tl_pricing_lead { filter: blur(calc(var(--tl-blur) * 1.5px)); }
-    .tl-preview #harga .tl_plans { filter: blur(calc(var(--tl-blur) * 7px)); }
+    /* Pricing preview. While html.tl-preview is set (top of the page) the
+       pricing section is blurred, stepped from the title (barely soft) to
+       the plan cards (out of focus). It is a plain filter on the elements
+       themselves, so the theme switch's circular reveal stays smooth, and
+       it lifts with a CSS transition the GPU runs, not per scroll event. */
+    #harga .tl_pricing_title,
+    #harga .tl_pricing_lead,
+    #harga .tl_plans {
+      transition: filter .45s ease;
+    }
+    .tl-preview #harga .tl_pricing_title { filter: blur(1.2px); }
+    .tl-preview #harga .tl_pricing_lead { filter: blur(1.5px); }
+    .tl-preview #harga .tl_plans { filter: blur(7px); }
 
     /* The veil over the preview: fades the bottom of the screen into the
        page background, holds the pinned footer copy and takes clicks.
@@ -178,11 +239,17 @@
       bottom: 0;
       z-index: 3;
       cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .3s ease, visibility 0s linear .3s;
     }
-    .tl_veil[hidden] { display: none; }
+    .tl-preview .tl_veil {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity .3s ease;
+    }
     /* Until js/pricing.js measures it: the veil starts 1px short of the
        peek, or lower on short screens where the hero's minimum height wins. */
-    .tl-preview .tl_veil[hidden] { display: block; }
     .tl_veil {
       height: min(calc(var(--tl-peek) - 1px), calc(100vh - 360px));
       height: min(calc(var(--tl-peek) - 1px), calc(100svh - 360px));
@@ -248,7 +315,7 @@
             </h1>
           </div>
 
-          <div class="tl_veil" hidden aria-hidden="true"><i class="tl_veil_fade"></i></div>
+          <div class="tl_veil" aria-hidden="true"><i class="tl_veil_fade"></i></div>
 
           <section class="tl_pricing_wrap" id="harga" aria-labelledby="tl_pricing_title">
             <div class="tl_pricing_hero">
@@ -435,6 +502,7 @@
     })();
   </script>
   <script src="/js/hero-words.js"></script>
+  <script src="/js/hero-dissolve.js"></script>
   <script src="/js/pricing.js"></script>
   <script src="/js/theme-toggle.js"></script>
   <script src="/js/back-to-top.js"></script>
