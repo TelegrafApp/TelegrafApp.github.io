@@ -1,17 +1,31 @@
 (function () {
   var root = document.documentElement;
   var btn = document.getElementById('theme-toggle');
+  var mq = window.matchMedia && matchMedia('(prefers-color-scheme: dark)');
+  var animating = false;
+
+  function onSystemChange(e) {
+    try { localStorage.removeItem('tl-theme'); } catch (err) {}
+    if (!animating) root.classList.toggle('tl-dark', e.matches);
+  }
+  if (mq) {
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange);
+    else if (mq.addListener) mq.addListener(onSystemChange);
+  }
+
   if (!btn) return;
 
   function save(dark) {
-    try { localStorage.setItem('tl-theme', dark ? 'dark' : 'light'); } catch (e) {}
+    try {
+      if (mq && dark === mq.matches) localStorage.removeItem('tl-theme');
+      else localStorage.setItem('tl-theme', dark ? 'dark' : 'light');
+    } catch (e) {}
   }
   function clip(el, value) {
     el.style.clipPath = value;
     el.style.webkitClipPath = value;
   }
 
-  var animating = false;
   btn.addEventListener('click', function () {
     if (animating) return;
     animating = true;
