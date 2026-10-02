@@ -286,7 +286,13 @@ body {
   line-height: 1.65;
   margin: 10px 0 0;
 }
-.tl_faq strong { color: var(--tl-accent); font-weight: 600; }
+.tl_faq .tl_faq_save,
+.tl_faq .tl_faq_save:hover,
+.tl_faq .tl_faq_save:focus {
+  color: var(--tl-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
 .tl_faq .tl_faq_note {
   color: var(--tl-muted);
   font-size: 13px;
