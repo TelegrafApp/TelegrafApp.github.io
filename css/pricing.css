@@ -170,6 +170,11 @@ body {
   padding-left: 26px;
   margin-top: 9px;
 }
+.tl_fn_mark {
+  color: var(--tl-accent);
+  font-weight: 600;
+  margin-left: 1px;
+}
 .tl_plan_features li:before {
   content: "";
   position: absolute;
@@ -182,6 +187,14 @@ body {
   transform: rotate(-45deg);
 }
 
+.tl_plans_footnote {
+  color: var(--tl-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  margin: 16px 2px 0;
+}
+.tl_plans_footnote .tl_fn_mark { margin: 0 3px 0 0; }
 .tl_pricing_heading {
   color: var(--tl-fg);
   font-size: 24px;

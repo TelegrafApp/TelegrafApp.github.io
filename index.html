@@ -86,7 +86,8 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .tl_frame, .tl_veil, .tl_reel > b,
-      #harga .tl_pricing_title, #harga .tl_pricing_lead, #harga .tl_plans {
+      #harga .tl_pricing_title, #harga .tl_pricing_lead, #harga .tl_plans,
+      #harga .tl_plans_footnote {
         transition: none !important;
       }
     }
@@ -185,12 +186,14 @@
 
     #harga .tl_pricing_title,
     #harga .tl_pricing_lead,
-    #harga .tl_plans {
+    #harga .tl_plans,
+    #harga .tl_plans_footnote {
       transition: filter .45s ease;
     }
     .tl-preview #harga .tl_pricing_title { filter: blur(1.2px); }
     .tl-preview #harga .tl_pricing_lead { filter: blur(1.5px); }
-    .tl-preview #harga .tl_plans { filter: blur(7px); }
+    .tl-preview #harga .tl_plans,
+    .tl-preview #harga .tl_plans_footnote { filter: blur(7px); }
 
     .tl_veil {
       position: fixed;
@@ -304,7 +307,7 @@
                 <p class="tl_plan_features_head">Semua di Gratis, plus:</p>
                 <ul class="tl_plan_features">
                   <li>Agen tanpa batas</li>
-                  <li>Kotak masuk omnichannel terpadu</li>
+                  <li>Kotak masuk omnichannel terpadu<span class="tl_fn_mark">*</span></li>
                   <li>Distribusi percakapan otomatis ke agen</li>
                   <li>Laporan dan analitik tim</li>
                   <li>Dukungan prioritas</li>
@@ -312,6 +315,9 @@
                 </ul>
               </div>
             </div>
+            <p class="tl_plans_footnote"><span class="tl_fn_mark" aria-hidden="true">*</span>Saat ini hanya
+              terhubung dengan WhatsApp. Integrasi saluran lain dan fitur baru akan hadir secara
+              bertahap. Pelanggan Premium tidak dikenakan biaya tambahan.</p>
 
             <h2 class="tl_pricing_heading">Bandingkan paket</h2>
             <table class="tl_compare">
