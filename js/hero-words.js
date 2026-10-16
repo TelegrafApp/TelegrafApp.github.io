@@ -3,7 +3,7 @@
   var hero = document.querySelector('.tl_hero');
   if (!frame || !hero) return;
 
-  var WORDS = ['CRM', 'Group', 'Platform', 'Bot', 'Inbox', 'Omnichannel', 'Support', 'Process', 'Agents'];
+  var WORDS = ['CRM', 'Graph', 'Platform', 'Bot', 'Inbox', 'CLI', 'Omnichannel', 'Agents'];
   var HOLD = 2200;
   var SLIDE = 600;
   var GAP = 0.24;
